@@ -1,0 +1,32 @@
+form {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 30px;
+  background-color: white;
+  border-radius: 20px;
+  margin: 20px auto;
+}
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+label {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 5px;
+}
+textarea {
+  font-family: inherit;
+  resize: none;
+  width: 300px;
+  height: 100px;
+  padding: 10px;
+  border: 2px solid #1f51ff;
+  border-radius: 20px;
+  outline: none;
+  background-color: #ebf4fa;
+}
