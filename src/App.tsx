@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
-import Form from "./components/Form";
+
+import Card from "./components/Card";
 import CardList from "./components/CardList";
 import Confirmation from "./pages/Confirmation";
 import Login from "./pages/Login";
+import Registration from "./pages/Registration";
+import Posts from "./pages/Posts";
+import Post from "./pages/Post";
+import Template from "./pages/Template";
 
 const MOCK_DATA = [
   {
@@ -47,12 +52,17 @@ const MOCK_DATA = [
 ];
 
 function App() {
+  // const [registration, setRegistration] = useState(true);
+
   return (
     <div className="App">
-      {/* <Form /> */}
-      <CardList data={MOCK_DATA} />
-      {/* <Confirmation title="Registration Confirmation" /> */}
+      {/* <Template /> */}
+      {/* <CardList data={MOCK_DATA} /> */}
+      {/* <Posts data={MOCK_DATA} /> */}
+      {/* <Post data={MOCK_DATA[3]} /> */}
       {/* <Login /> */}
+      <Registration />
+      {/* <Confirmation /> */}
     </div>
   );
 }

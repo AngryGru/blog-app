@@ -10,3 +10,27 @@
   font-size: 15px;
   text-align: center;
 }
+
+.btnTitle {
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+  color: gray;
+  background-color: transparent;
+}
+
+.btnLink {
+  cursor: pointer;
+  background-color: transparent;
+  color: #1f51ff;
+  border: none;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.active {
+  color: #1f51ff;
+}

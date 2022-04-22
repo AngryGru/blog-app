@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.templateContainer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.templateContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.templateTitle {
+  color: #1f51ff;
+}
+.templateBody {
+  color: gray;
+}

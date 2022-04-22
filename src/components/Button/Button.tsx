@@ -1,13 +1,9 @@
 import React from "react";
 import "./Button.css";
 
-const handleClick = () => {
-  console.log("CLICK");
-};
-
 const Button = (props: any) => {
   return (
-    <button onClick={handleClick} className="btn">
+    <button onClick={props.onClick} className={props.className}>
       {props.value}
     </button>
   );

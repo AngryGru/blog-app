@@ -4,15 +4,15 @@ import "./Card.css";
 const Card = (props: any) => {
   return (
     <div className="card">
-      <div className="card-content">
+      <div className="cardContent">
         {props.image ? (
           <img src={props.image} />
         ) : (
           <img src={require("../../assets/no-img-bg.jpg")} />
         )}
-        <h3 className="card-content_title">{props.title}</h3>
-        <p className="card-content_text">{props.text}</p>
-        <p className="card-content_date">
+        <h3 className="cardContentTitle">{props.title}</h3>
+        <p className="cardContentText">{props.text}</p>
+        <p className="cardContentDate">
           {props.date.split("-").reverse().join(".")}
         </p>
       </div>
