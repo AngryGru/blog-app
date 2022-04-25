@@ -8,6 +8,7 @@ import Authorization from "./pages/Authorization";
 import Posts from "./pages/Posts";
 import Post from "./pages/Post";
 import Template from "./pages/Template";
+import PageHeader from "./components/PageHeader";
 
 const MOCK_DATA = [
   {
@@ -53,12 +54,12 @@ const MOCK_DATA = [
 function App() {
   return (
     <div className="App">
+      <PageHeader />
       {/* <Template /> */}
       {/* <CardList data={MOCK_DATA} /> */}
       {/* <Posts data={MOCK_DATA} /> */}
       {/* <Post data={MOCK_DATA[3]} /> */}
       <Authorization />
-      {/* <Registration /> */}
       {/* <Confirmation /> */}
     </div>
   );

@@ -1,0 +1,19 @@
+header {
+  position: sticky;
+  top: 0;
+  box-sizing: border-box;
+  color: blue;
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+#page-wrap {
+  box-sizing: border-box;
+  padding-left: 10px;
+  width: 90%;
+  align-self: flex-end;
+
+  padding-bottom: 10px;
+  padding-top: 15px;
+}

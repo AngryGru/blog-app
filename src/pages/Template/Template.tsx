@@ -1,5 +1,6 @@
 import React from "react";
 import "./Template.css";
+import PageHeader from "../../components/PageHeader";
 import Button from "../../components/Button";
 
 const Template = () => {

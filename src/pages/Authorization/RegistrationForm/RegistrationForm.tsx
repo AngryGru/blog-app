@@ -1,9 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, FC } from "react";
 import "./RegistrationForm.css";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 
-const RegistrationForm = (props: any) => {
+type RegistrationFormProps = {
+  onLoginLinkClick: (name: string) => void;
+  onSignUpClick: () => void;
+};
+
+const RegistrationForm: FC<RegistrationFormProps> = (props) => {
   const { onLoginLinkClick, onSignUpClick } = props;
 
   const [username, setUsername] = useState("");
@@ -71,7 +76,6 @@ const RegistrationForm = (props: any) => {
   const confirmPasswordHandle = (e: any) => {
     setConfirmPassword(e.target.value);
     if (confirmPassword && e.target.value !== password) {
-      console.log(confirmPassword, password);
       setConfirmPasswordError("Passwords don't match");
     } else {
       setConfirmPasswordError("");
@@ -133,7 +137,7 @@ const RegistrationForm = (props: any) => {
           <span style={{ color: "red" }}>{passwordError}</span>
         )}
         <Input
-          type={"text"}
+          type={"password"}
           name={"password"}
           value={password}
           placeholder={"Enter your password"}
@@ -147,7 +151,7 @@ const RegistrationForm = (props: any) => {
           <span style={{ color: "red" }}>{confirmPasswordError}</span>
         )}
         <Input
-          type={"text"}
+          type={"password"}
           name={"confirmPassword"}
           value={confirmPassword}
           placeholder={"Repeat your password"}
