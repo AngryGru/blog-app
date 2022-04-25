@@ -54,12 +54,12 @@ const LoginForm = () => {
     }
   };
 
-  const onSubmitLoginForm = (e: any) => {
-    e.preventDefault();
-  };
+  //   const onSubmitLoginForm = (e: any) => {
+  //     e.preventDefault();
+  //   };
 
   return (
-    <form onSubmit={onSubmitLoginForm} className="Login">
+    <form className="Login">
       <label>
         Email:
         {emailDirty && emailError && (
