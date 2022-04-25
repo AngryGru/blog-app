@@ -1,7 +1,14 @@
-import React from "react";
+import React, { FC } from "react";
 import "./Button.css";
 
-const Button = (props: any) => {
+type ButtonProps = {
+  disabled?: boolean;
+  onClick?: () => void;
+  className: string;
+  value: string;
+};
+
+const Button: FC<ButtonProps> = (props) => {
   return (
     <button
       disabled={props.disabled}

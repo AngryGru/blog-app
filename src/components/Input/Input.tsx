@@ -1,5 +1,15 @@
-import React from "react";
+import React, { FC } from "react";
 import "./Input.css";
+
+// type InputProps = {
+//   type: string;
+//   className: string;
+//   name: string;
+//   value: string;
+//   placeholder: string;
+//   onBlur?: () => void;
+//   onChange?: () => void;
+// };
 
 const Input = (props: any) => {
   return (

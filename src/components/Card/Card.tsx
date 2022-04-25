@@ -1,7 +1,14 @@
-import React from "react";
+import React, { FC } from "react";
 import "./Card.css";
 
-const Card = (props: any) => {
+type CardProps = {
+  image?: string;
+  title: string;
+  text: string;
+  date: string;
+};
+
+const Card: FC<CardProps> = (props) => {
   return (
     <div className="card">
       <div className="cardContent">
