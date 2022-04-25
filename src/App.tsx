@@ -53,7 +53,7 @@ const MOCK_DATA = [
 function App() {
   return (
     <div className="App">
-      <Template />
+      {/* <Template /> */}
       {/* <CardList data={MOCK_DATA} /> */}
       {/* <Posts data={MOCK_DATA} /> */}
       {/* <Post data={MOCK_DATA[3]} /> */}
