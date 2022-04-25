@@ -23,3 +23,16 @@
 .templateBody {
   color: gray;
 }
+/* dark */
+.containerDark {
+  background-color: #1f51ff;
+}
+.titleDark {
+  color: white;
+}
+.bodyDark {
+  color: white;
+}
+.btnDark {
+  background-color: mediumblue;
+}

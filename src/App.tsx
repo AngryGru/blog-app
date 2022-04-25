@@ -4,8 +4,7 @@ import "./App.css";
 import Card from "./components/Card";
 import CardList from "./components/CardList";
 import Confirmation from "./pages/Confirmation";
-import Login from "./pages/Login";
-import Registration from "./pages/Registration";
+import Authorization from "./pages/Authorization";
 import Posts from "./pages/Posts";
 import Post from "./pages/Post";
 import Template from "./pages/Template";
@@ -52,16 +51,14 @@ const MOCK_DATA = [
 ];
 
 function App() {
-  // const [registration, setRegistration] = useState(true);
-
   return (
     <div className="App">
-      {/* <Template /> */}
+      <Template />
       {/* <CardList data={MOCK_DATA} /> */}
       {/* <Posts data={MOCK_DATA} /> */}
       {/* <Post data={MOCK_DATA[3]} /> */}
-      {/* <Login /> */}
-      <Registration />
+      <Authorization />
+      {/* <Registration /> */}
       {/* <Confirmation /> */}
     </div>
   );

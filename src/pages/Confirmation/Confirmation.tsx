@@ -7,11 +7,14 @@ const Confirmation = (props: any) => {
     <div className="confirmationContainer">
       <div className="confirmationContent">
         <h2 className="confirmationTitle">Registration Confirmation</h2>
-        <p className="confirmationText">
-          Please activate your account with <br /> the activation link in the
-          email <Button className={"btnLink"} value={"test@gmail.com"} /> <br />
-          Please check your email
-        </p>
+        <div className="confirmationText">
+          <p>Please activate your account with</p>
+          <p>
+            the activation link in the email{" "}
+            <Button className={"btnLink"} value={"test@gmail.com"} />
+          </p>
+          <p>Please check your email</p>
+        </div>
         <Button className={"btn"} value={"Home"} />
       </div>
     </div>
