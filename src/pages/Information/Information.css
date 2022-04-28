@@ -1,0 +1,60 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.informationContainer {
+  width: 100%;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.informationTitle {
+  font-size: 25px;
+  font-weight: bold;
+  color: blue;
+}
+.informationTabs {
+  display: flex;
+  gap: 40px;
+}
+.infBtn {
+  width: 80px;
+  height: 30px;
+  border: 2px solid #1f51ff;
+  background-color: #1f51ff;
+  color: white;
+  outline: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 15px;
+  text-align: center;
+}
+.infBtnActive {
+  font-weight: bold;
+  font-size: 17px;
+}
+.informationBody {
+  background-color: gainsboro;
+  padding: 30px;
+  border-radius: 15px;
+  height: 300px;
+  overflow-y: scroll;
+  text-align: justify;
+}
+.informationBody::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.informationContainerDark .informationTitle {
+  color: gold;
+}
+
+.informationContainerDark .infBtn {
+  background-color: gold;
+  border-color: gold;
+  color: black;
+}
