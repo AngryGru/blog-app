@@ -3,11 +3,8 @@
   padding: 0;
 }
 .templateContainer {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  color: gray;
+  margin-top: 60px;
 }
 .templateContent {
   display: flex;
@@ -20,19 +17,15 @@
 .templateTitle {
   color: #1f51ff;
 }
-.templateBody {
-  color: gray;
-}
-/* dark */
-.containerDark {
-  background-color: #1f51ff;
-}
-.titleDark {
+
+.templateContainerDark {
   color: white;
 }
-.bodyDark {
-  color: white;
+.templateContainerDark .templateTitle {
+  color: gold;
 }
-.btnDark {
-  background-color: mediumblue;
+.templateContainerDark .btn {
+  color: black;
+  background-color: gold;
+  border-color: gold;
 }

@@ -1,16 +1,21 @@
 import React from "react";
 import "./Posts.css";
 import CardList from "../../components/CardList";
+import { Theme, useThemeContext } from "../../context/themeModeContext";
+import classNames from "classnames";
 
 const Posts = (props: any) => {
+  const { theme, onChangeTheme = () => {} } = useThemeContext();
+  const isLightTheme = theme === Theme.Light;
   return (
-    <div className="postsPage">
+    <div
+      className={classNames("postsPage", {
+        ["postsPageDark"]: !isLightTheme,
+      })}
+    >
       <div className="postsHeader">
-        <div className="postsMenu">Username</div>
-        <div className="postsTitle">
-          <p>My posts</p>
-          <button className="addBtn">Add</button>
-        </div>
+        <p>My posts</p>
+        <button className="addBtn">Add</button>
       </div>
       <CardList data={props.data} />
     </div>

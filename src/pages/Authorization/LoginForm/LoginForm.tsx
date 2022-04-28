@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./LoginForm.css";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
+import { Theme, useThemeContext } from "../../../context/themeModeContext";
+import classNames from "classnames";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -58,8 +60,16 @@ const LoginForm = () => {
     e.preventDefault();
   };
 
+  const { theme } = useThemeContext();
+  const isLightTheme = theme === Theme.Light;
+
   return (
-    <form onSubmit={onSubmitLoginForm} className="Login">
+    <form
+      onSubmit={onSubmitLoginForm}
+      className={classNames("loginForm", {
+        ["darkLoginForm"]: !isLightTheme,
+      })}
+    >
       <label>
         Email:
         {emailDirty && emailError && (

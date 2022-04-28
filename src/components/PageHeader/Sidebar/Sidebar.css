@@ -1,27 +1,35 @@
 /* Position and sizing of burger button */
 .bm-burger-button {
   position: fixed;
-  width: 26px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   left: 30px;
-  top: 15px;
+  top: 13px;
 }
-/* Color/shape of burger icon bars */
-.bm-burger-bars {
-  background: blue;
+.barsLight {
+  color: blue;
 }
-/* Color/shape of burger icon bars on hover*/
-.bm-burger-bars-hover {
-  background: darkblue;
+.barsLight:hover {
+  color: darkblue;
+}
+
+.barsDark {
+  color: gold;
+}
+.barsDark:hover {
+  color: goldenrod;
 }
 /* Position and sizing of clickable cross button */
 .bm-cross-button {
-  height: 24px;
-  width: 24px;
+  height: 25px;
+  width: 25px;
 }
 /* Color/shape of close button cross */
-.bm-cross {
-  background: white;
+.crossLight {
+  color: white;
+}
+.crossDark {
+  color: gold;
 }
 /*
   Sidebar wrapper styles
@@ -32,24 +40,26 @@
   height: 100%;
 }
 /* General sidebar styles */
-.bm-menu {
-  /* background: #373a47; */
+.menuLight {
   background: #1f51ff;
-  padding: 2.5em 1.5em 0;
-  font-size: 1.15em;
+  padding: 25px 15px 0;
+  font-size: 25px;
 }
-/* Morph shape necessary with bubble or elastic */
-.bm-morph-shape {
-  fill: #373a47;
+.menuLight::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
+.menuDark {
+  background: black;
+}
+
 /* Wrapper for item list */
 .bm-item-list {
-  color: #b8b7ad;
-  padding: 0.8em;
+  padding: 20px;
 }
 /* Individual item */
 .bm-item {
-  display: inline-block;
+  display: block;
 }
 /* Styling of overlay */
 .bm-overlay {
@@ -57,15 +67,25 @@
 }
 
 /* Individual item */
-.bm-item {
-  display: inline-block;
-
+.lightItem {
+  display: block;
   color: white;
-  margin-bottom: 10px;
-  text-align: justify;
+  margin-bottom: 20px;
+  text-align: left;
   text-decoration: none;
   transition: color 0.2s;
 }
-.bm-item:hover {
+.lightItem:hover {
   color: lightblue;
+}
+.darkItem {
+  display: block;
+  color: white;
+  margin-bottom: 20px;
+  text-align: left;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.darkItem:hover {
+  color: gold;
 }

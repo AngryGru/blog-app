@@ -2,22 +2,22 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 90%;
-  margin: 0 auto;
+  margin-top: 60px;
 }
-.postHeader {
+.postTitle {
   color: blue;
   font-weight: bold;
   text-align: left;
-}
-.postMenu {
-  padding: 10px;
-  font-size: 17px;
-}
-.postTitle {
-  padding: 10px;
-  display: flex;
-  gap: 20px;
-  align-items: center;
   font-size: 25px;
+}
+
+.postPageDark .postTitle {
+  color: gold;
+}
+.postPageDark .card {
+  background-color: black;
+}
+.postPageDark .cardContentDate,
+.postPageDark .cardContentTitle {
+  color: gold;
 }

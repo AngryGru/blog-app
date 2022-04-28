@@ -1,8 +1,16 @@
-.loginHeader {
+.authHeader {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 20px;
   width: 100%;
   font-size: 20px;
+}
+
+.authHeaderDark .dash {
+  background-color: goldenrod;
+}
+
+.authHeaderDark .active {
+  color: gold;
 }

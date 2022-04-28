@@ -2,14 +2,20 @@ import React from "react";
 import "./Post.css";
 import Card from "../../components/Card";
 import { idText } from "typescript";
+import { Theme, useThemeContext } from "../../context/themeModeContext";
+import classNames from "classnames";
 
 const Post = (props: any) => {
+  const { theme, onChangeTheme = () => {} } = useThemeContext();
+  const isLightTheme = theme === Theme.Light;
+
   return (
-    <div className="postPage">
-      <div className="postHeader">
-        <div className="postMenu">Username</div>
-        <div className="postTitle">Content title</div>
-      </div>
+    <div
+      className={classNames("postPage", {
+        ["postPageDark"]: !isLightTheme,
+      })}
+    >
+      <div className="postTitle">Content title</div>
       <Card
         key={props.data.id}
         image={props.data.image}

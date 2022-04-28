@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import "./App.css";
-
-import Card from "./components/Card";
-import CardList from "./components/CardList";
-import Confirmation from "./pages/Confirmation";
+import PageHeader from "./components/PageHeader";
+import Template from "./pages/Template";
 import Authorization from "./pages/Authorization";
+import Confirmation from "./pages/Confirmation";
 import Posts from "./pages/Posts";
 import Post from "./pages/Post";
-import Template from "./pages/Template";
-import PageHeader from "./components/PageHeader";
+
+import classNames from "classnames";
+import { ThemeModeProvider } from "./context/ThemeModeProvider";
+import { Theme } from "./context/themeModeContext";
 
 const MOCK_DATA = [
   {
@@ -49,20 +50,54 @@ const MOCK_DATA = [
     title: "What is Dolorum?",
     author: 3,
   },
+  {
+    id: 4,
+    image:
+      "https://www.teahub.io/photos/full/128-1284836_desktop-wallpaper-laptop-mac-macbook-air-vk42-rainbow.jpg",
+    text: "Sit amet consectetur lorem ipsum dolor adipisicing elit. Eligendi, dolorum.",
+    date: "2022-05-09",
+    lesson_num: 4,
+    title: "Avocado runs the world!",
+    author: 4,
+  },
+  {
+    id: 5,
+    image:
+      "https://stackify.com/wp-content/uploads/2017/11/OOPS-concept-abstraction-881x441.jpg",
+    text: "Sit amet consectetur lorem ipsum dolor adipisicing elit. Eligendi, dolorum. Eligendi, dolorum.",
+    date: "2022-05-07",
+    lesson_num: 5,
+    title: "The Voyager's Courage",
+    author: 5,
+  },
 ];
 
-function App() {
+const App = () => {
+  const [theme, setTheme] = useState(Theme.Light);
+
+  const onChangeTheme = (value: Theme) => {
+    setTheme(value);
+  };
+  const isLightTheme = theme === Theme.Light;
+
   return (
-    <div className="App">
-      <PageHeader />
-      {/* <Template /> */}
-      {/* <CardList data={MOCK_DATA} /> */}
-      {/* <Posts data={MOCK_DATA} /> */}
-      {/* <Post data={MOCK_DATA[3]} /> */}
-      <Authorization />
-      {/* <Confirmation /> */}
-    </div>
+    <ThemeModeProvider theme={theme} onChangeTheme={onChangeTheme}>
+      <div className="App">
+        <PageHeader />
+        <div
+          className={classNames("appBody", {
+            ["appBodyDark"]: !isLightTheme,
+          })}
+        >
+          {/* <Template /> */}
+          <Authorization />
+          {/* <Confirmation /> */}
+          {/* <Posts data={MOCK_DATA} /> */}
+          {/* <Post data={MOCK_DATA[3]} /> */}
+        </div>
+      </div>
+    </ThemeModeProvider>
   );
-}
+};
 
 export default App;

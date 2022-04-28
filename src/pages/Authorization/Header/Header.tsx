@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import "./Header.css";
 import Button from "../../../components/Button";
+import { Theme, useThemeContext } from "../../../context/themeModeContext";
 import classNames from "classnames";
 
 type HeaderProps = {
@@ -10,8 +11,16 @@ type HeaderProps = {
 
 const Header: FC<HeaderProps> = ({ onClick, activeTab }) => {
   const isLoginActive = activeTab === "login";
+
+  const { theme } = useThemeContext();
+  const isLightTheme = theme === Theme.Light;
+
   return (
-    <div className="loginHeader">
+    <div
+      className={classNames("authHeader", {
+        ["authHeaderDark"]: !isLightTheme,
+      })}
+    >
       <Button
         className={classNames("btnTitle", { ["active"]: isLoginActive })}
         onClick={() => onClick("login")}

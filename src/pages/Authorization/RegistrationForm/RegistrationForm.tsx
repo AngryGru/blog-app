@@ -3,6 +3,9 @@ import "./RegistrationForm.css";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 
+import { Theme, useThemeContext } from "../../../context/themeModeContext";
+import classNames from "classnames";
+
 type RegistrationFormProps = {
   onLoginLinkClick: (name: string) => void;
   onSignUpClick: () => void;
@@ -10,7 +13,6 @@ type RegistrationFormProps = {
 
 const RegistrationForm: FC<RegistrationFormProps> = (props) => {
   const { onLoginLinkClick, onSignUpClick } = props;
-
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -97,12 +99,20 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
     }
   };
   const onSubmit = (e: any) => {
-    e.preventDefault();
+    // e.preventDefault();
     onSignUpClick();
   };
 
+  const { theme } = useThemeContext();
+  const isLightTheme = theme === Theme.Light;
+
   return (
-    <form onSubmit={(e: any) => onSubmit(e)} className="registrationForm">
+    <form
+      onSubmit={(e: any) => onSubmit(e)}
+      className={classNames("registrationForm", {
+        ["darkRegistrationForm"]: !isLightTheme,
+      })}
+    >
       <label>
         Username:
         {usernameDirty && usernameError && (
@@ -160,7 +170,6 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
         />
       </label>
       <Button disabled={!formValid} className={"btn"} value={"Sign up"} />
-
       <p>
         If you have account you can{" "}
         <Button

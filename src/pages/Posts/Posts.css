@@ -1,26 +1,29 @@
 .postsPage {
+  box-sizing: border-box;
+  height: 100%;
+  overflow: scroll;
+  padding: 30px;
+  padding-bottom: 50px;
+
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  width: 90%;
-  margin: 0 auto;
+  align-items: center;
+}
+.postsPage::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 .postsHeader {
-  color: blue;
-  font-weight: bold;
-  text-align: left;
-}
-.postsMenu {
-  padding: 10px;
-  font-size: 17px;
-}
-.postsTitle {
-  padding: 10px;
+  width: 100%;
   display: flex;
-  gap: 20px;
   align-items: center;
+  justify-content: flex-start;
+  gap: 30px;
   font-size: 25px;
+  font-weight: bold;
+  color: blue;
 }
+
 .addBtn {
   width: 80px;
   height: 30px;
@@ -32,4 +35,20 @@
   cursor: pointer;
   font-size: 15px;
   text-align: center;
+}
+
+.postsPageDark .postsHeader {
+  color: gold;
+}
+.postsPageDark .addBtn {
+  background-color: gold;
+  border-color: gold;
+  color: black;
+}
+.postsPageDark .card {
+  background-color: black;
+}
+.postsPageDark .cardContentDate,
+.postsPageDark .cardContentTitle {
+  color: gold;
 }

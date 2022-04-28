@@ -3,13 +3,16 @@
   padding: 0;
 }
 .card {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 400px;
-  background-color: lavenderblush;
+  width: 350px;
+  background-color: blue;
+
   border-radius: 15px;
   padding: 15px;
+  cursor: pointer;
 }
 .card:hover {
   position: relative;
@@ -23,14 +26,25 @@
   width: 360px;
   text-align: justify;
 }
-.cardContentText {
-  color: gray;
-}
-.cardContentDate {
-  font-weight: bold;
-  color: royalblue;
-}
 img {
   height: 150px;
   border-radius: 15px;
+}
+.cardInfo {
+  height: 110px;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  color: white;
+}
+.cardContentText {
+  color: darkgray;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cardContentDate {
+  font-weight: bold;
+  color: white;
 }

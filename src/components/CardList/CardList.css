@@ -1,9 +1,8 @@
 .list {
-  max-width: 100%;
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 30px;
-  overflow: hidden;
   margin: 20px;
 }

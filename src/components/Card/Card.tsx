@@ -17,11 +17,13 @@ const Card: FC<CardProps> = (props) => {
         ) : (
           <img src={require("../../assets/no-img-bg.jpg")} />
         )}
-        <h3 className="cardContentTitle">{props.title}</h3>
-        <p className="cardContentText">{props.text}</p>
-        <p className="cardContentDate">
-          {props.date.split("-").reverse().join(".")}
-        </p>
+        <div className="cardInfo">
+          <h3 className="cardContentTitle">{props.title}</h3>
+          <p className="cardContentText">{props.text}</p>
+          <p className="cardContentDate">
+            {props.date.split("-").reverse().join(".")}
+          </p>
+        </div>
       </div>
     </div>
   );
