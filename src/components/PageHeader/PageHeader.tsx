@@ -11,12 +11,9 @@ const PageHeader = () => {
   const isLightTheme = theme === Theme.Light;
 
   const onClickTheme = () => {
-    if (theme === Theme.Light) {
-      onChangeTheme(Theme.Dark);
-    }
-    if (theme === Theme.Dark) {
-      onChangeTheme(Theme.Light);
-    }
+    theme === Theme.Light
+      ? onChangeTheme(Theme.Dark)
+      : onChangeTheme(Theme.Light);
   };
 
   return (

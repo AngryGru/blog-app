@@ -16,10 +16,6 @@ const Authorization = (props: any) => {
     setConfirmed(true);
   };
 
-  const onFooterButtonClick = (name: string) => {
-    setTabName(name);
-  };
-
   return !isConfirmed ? (
     <div className="authotizationContainer">
       <div className="authorizationContent">
@@ -29,7 +25,7 @@ const Authorization = (props: any) => {
         ) : (
           <RegistrationForm
             onSignUpClick={onSignUpButtonClick}
-            onLoginLinkClick={onFooterButtonClick}
+            onLoginLinkClick={onHeaderButtonClick}
           />
         )}
       </div>

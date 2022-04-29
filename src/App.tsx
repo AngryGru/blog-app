@@ -108,8 +108,8 @@ const App = () => {
           })}
         >
           {/* <Template /> */}
-          <Information info={MOCK_INFO} />
-          {/* <Authorization /> */}
+          {/* <Information info={MOCK_INFO} /> */}
+          <Authorization />
           {/* <Confirmation /> */}
           {/* <Posts data={MOCK_DATA} /> */}
           {/* <Post data={MOCK_DATA[3]} /> */}
