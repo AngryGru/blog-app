@@ -2,6 +2,7 @@
   position: sticky;
   top: 0;
   background-color: white;
+  border-bottom: 0.5px solid gainsboro;
   box-sizing: border-box;
   color: blue;
   font-size: 20px;
@@ -22,6 +23,7 @@
 
 .headerDark {
   background-color: black;
+  border-bottom: none;
   color: white;
 }
 

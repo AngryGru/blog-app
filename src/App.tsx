@@ -7,6 +7,7 @@ import Confirmation from "./pages/Confirmation";
 import Posts from "./pages/Posts";
 import Post from "./pages/Post";
 import Information from "./pages/Information";
+import Router from "./pages/Router";
 
 import classNames from "classnames";
 import { ThemeModeProvider } from "./context/ThemeModeProvider";
@@ -100,20 +101,12 @@ const App = () => {
 
   return (
     <ThemeModeProvider theme={theme} onChangeTheme={onChangeTheme}>
-      <div className="App">
-        <PageHeader />
-        <div
-          className={classNames("appBody", {
-            ["appBodyDark"]: !isLightTheme,
-          })}
-        >
-          {/* <Template /> */}
-          {/* <Information info={MOCK_INFO} /> */}
-          <Authorization />
-          {/* <Confirmation /> */}
-          {/* <Posts data={MOCK_DATA} /> */}
-          {/* <Post data={MOCK_DATA[3]} /> */}
-        </div>
+      <div
+        className={classNames("App", {
+          ["AppDark"]: !isLightTheme,
+        })}
+      >
+        <Router />
       </div>
     </ThemeModeProvider>
   );

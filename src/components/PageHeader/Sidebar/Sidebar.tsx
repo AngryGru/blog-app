@@ -3,6 +3,7 @@ import { slide as Menu } from "react-burger-menu";
 import "./Sidebar.css";
 import { FiMenu } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
+import { NavLink } from "react-router-dom";
 
 import { Theme, useThemeContext } from "../../../context/themeModeContext";
 import classNames from "classnames";
@@ -27,12 +28,12 @@ export default (props: any) => {
         ["darkItem"]: !isLightTheme,
       })}
     >
-      <a className="menu-item" href="#">
+      <NavLink className="menu-item" to="cards-list">
         All posts
-      </a>
-      <a className="menu-item" href="#">
+      </NavLink>
+      <NavLink className="menu-item" to="info">
         My posts
-      </a>
+      </NavLink>
       <a className="menu-item" href="#">
         Add posts
       </a>

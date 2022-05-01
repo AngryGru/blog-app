@@ -3,16 +3,17 @@ import "./RegistrationForm.css";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 
+import { useNavigate } from "react-router-dom";
+
 import { Theme, useThemeContext } from "../../../context/themeModeContext";
 import classNames from "classnames";
 
 type RegistrationFormProps = {
   onLoginLinkClick: (name: string) => void;
-  onSignUpClick: () => void;
 };
 
 const RegistrationForm: FC<RegistrationFormProps> = (props) => {
-  const { onLoginLinkClick, onSignUpClick } = props;
+  const { onLoginLinkClick } = props;
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,6 +34,8 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
   );
   const [formValid, setFormValid] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (usernameError || emailError || passwordError || confirmPasswordError) {
       setFormValid(false);
@@ -43,11 +46,11 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
 
   const usernameHandle = (e: any) => {
     setUsername(e.target.value);
-    const regex = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z*]/g;
-    if (e.target.value.length < 3 || e.target.value.length > 15) {
-      setUsernameError("Username should contain from 3 to 15 characters");
+    const regex = /(?=.*[a-z])(?=.*[A-Z])[a-zA-Z*]/g;
+    if (e.target.value.length > 15) {
+      setUsernameError("This field must be less than 15 characters");
     } else if (!regex.test(String(e.target.value))) {
-      setUsernameError("Username should contain A-Z, a-z, 0-9");
+      setUsernameError("Username should contain A-Z, a-z");
     } else {
       setUsernameError("");
     }
@@ -98,9 +101,12 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
       setConfirmPasswordDirty(true);
     }
   };
-  const onSubmit = (e: any) => {
-    // e.preventDefault();
-    onSignUpClick();
+  const onSubmit = () => {
+    navigate("/confirm", {
+      state: {
+        email,
+      },
+    });
   };
 
   const { theme } = useThemeContext();
@@ -108,17 +114,20 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
 
   return (
     <form
-      onSubmit={(e: any) => onSubmit(e)}
+      onSubmit={onSubmit}
       className={classNames("registrationForm", {
         ["darkRegistrationForm"]: !isLightTheme,
       })}
     >
       <label>
-        Username:
-        {usernameDirty && usernameError && (
-          <span style={{ color: "red" }}>{usernameError}</span>
-        )}
+        <div>Username:</div>
+        <div>
+          {usernameDirty && usernameError && (
+            <span style={{ color: "red" }}>{usernameError}</span>
+          )}
+        </div>
         <Input
+          className={"regInp"}
           type={"text"}
           name={"username"}
           value={username}
@@ -128,11 +137,14 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
         />
       </label>
       <label>
-        Email:
-        {emailDirty && emailError && (
-          <span style={{ color: "red" }}>{emailError}</span>
-        )}
+        <div>Email:</div>
+        <div>
+          {emailDirty && emailError && (
+            <span style={{ color: "red" }}>{emailError}</span>
+          )}
+        </div>
         <Input
+          className={"regInp"}
           type={"email"}
           name={"email"}
           value={email}
@@ -142,11 +154,14 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
         />
       </label>
       <label>
-        Password:
-        {passwordDirty && passwordError && (
-          <span style={{ color: "red" }}>{passwordError}</span>
-        )}
+        <div>Password:</div>
+        <div>
+          {passwordDirty && passwordError && (
+            <span style={{ color: "red" }}>{passwordError}</span>
+          )}
+        </div>
         <Input
+          className={"regInp"}
           type={"password"}
           name={"password"}
           value={password}
@@ -156,11 +171,14 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
         />
       </label>
       <label>
-        Confirm password:
-        {confirmPasswordDirty && confirmPasswordError && (
-          <span style={{ color: "red" }}>{confirmPasswordError}</span>
-        )}
+        <div>Confirm password:</div>
+        <div>
+          {confirmPasswordDirty && confirmPasswordError && (
+            <span style={{ color: "red" }}>{confirmPasswordError}</span>
+          )}
+        </div>
         <Input
+          className={"regInp"}
           type={"password"}
           name={"confirmPassword"}
           value={confirmPassword}
@@ -169,7 +187,11 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
           onChange={(e: any) => confirmPasswordHandle(e)}
         />
       </label>
-      <Button disabled={!formValid} className={"btn"} value={"Sign up"} />
+      <Button
+        disabled={!formValid}
+        className={"btn regBtn"}
+        value={"Sign up"}
+      />
       <p>
         If you have account you can{" "}
         <Button

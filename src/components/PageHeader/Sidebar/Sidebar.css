@@ -78,6 +78,12 @@
 .lightItem:hover {
   color: lightblue;
 }
+a.bm-item.lightItem.menu-item.active {
+  color: navy;
+}
+a.bm-item.darkItem.menu-item.active {
+  color: goldenrod;
+}
 .darkItem {
   display: block;
   color: white;

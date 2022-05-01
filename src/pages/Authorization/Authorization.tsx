@@ -7,31 +7,22 @@ import Confirmation from "../Confirmation";
 
 const Authorization = (props: any) => {
   const [tabName, setTabName] = useState("login");
-  const [isConfirmed, setConfirmed] = useState(false);
 
   const onHeaderButtonClick = (name: string) => {
     setTabName(name);
   };
-  const onSignUpButtonClick = () => {
-    setConfirmed(true);
-  };
 
-  return !isConfirmed ? (
+  return (
     <div className="authotizationContainer">
       <div className="authorizationContent">
         <Header onClick={onHeaderButtonClick} activeTab={tabName} />
         {tabName === "login" ? (
           <LoginForm />
         ) : (
-          <RegistrationForm
-            onSignUpClick={onSignUpButtonClick}
-            onLoginLinkClick={onHeaderButtonClick}
-          />
+          <RegistrationForm onLoginLinkClick={onHeaderButtonClick} />
         )}
       </div>
     </div>
-  ) : (
-    <Confirmation />
   );
 };
 

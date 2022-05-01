@@ -71,11 +71,14 @@ const LoginForm = () => {
       })}
     >
       <label>
-        Email:
-        {emailDirty && emailError && (
-          <span style={{ color: "red" }}>{emailError}</span>
-        )}
+        <div>Email:</div>
+        <div>
+          {emailDirty && emailError && (
+            <span style={{ color: "red" }}>{emailError}</span>
+          )}
+        </div>
         <Input
+          className={"loginInp"}
           type={"email"}
           name={"email"}
           value={email}
@@ -85,11 +88,14 @@ const LoginForm = () => {
         />
       </label>
       <label>
-        Password:
-        {passwordDirty && passwordError && (
-          <span style={{ color: "red" }}>{passwordError}</span>
-        )}
+        <div>Password:</div>
+        <div>
+          {passwordDirty && passwordError && (
+            <span style={{ color: "red" }}>{passwordError}</span>
+          )}
+        </div>
         <Input
+          className={"loginInp"}
           type={"password"}
           name={"password"}
           value={password}
@@ -98,7 +104,11 @@ const LoginForm = () => {
           onChange={(e: any) => passwordHandle(e)}
         />
       </label>
-      <Button disabled={!formValid} className={"btn"} value={"Login"} />
+      <Button
+        disabled={!formValid}
+        className={"btn loginBtn"}
+        value={"Login"}
+      />
       <p>
         Forgot your password?{" "}
         <Button className={"btnLink"} value={"Reset password"} />

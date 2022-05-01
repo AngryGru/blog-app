@@ -8,6 +8,9 @@
   align-items: center;
   margin-top: 60px;
 }
+.confirmBtn {
+  width: 70%;
+}
 .confirmationContent {
   display: flex;
   flex-direction: column;

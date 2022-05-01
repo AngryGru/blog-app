@@ -3,10 +3,19 @@ import "./Confirmation.css";
 import Button from "../../components/Button";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import classNames from "classnames";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 const Confirmation = (props: any) => {
   const { theme } = useThemeContext();
   const isLightTheme = theme === Theme.Light;
+
+  const location: any = useLocation();
+  // const navigate = useNavigate()
+
+  const onHomeClick = () => {
+    localStorage.setItem("isLoggedIn", "true");
+    window.location.replace("/cards-list");
+  };
 
   return (
     <div
@@ -20,11 +29,18 @@ const Confirmation = (props: any) => {
           <p>Please activate your account with</p>
           <p>
             the activation link in the email{" "}
-            <Button className={"btnLink"} value={"test@gmail.com"} />
+            <Button
+              className={"btnLink"}
+              value={location?.state?.email ?? ""}
+            />
           </p>
           <p>Please check your email</p>
         </div>
-        <Button className={"btn"} value={"Home"} />
+        <Button
+          className={"btn confirmBtn"}
+          value={"Home"}
+          onClick={onHomeClick}
+        />
       </div>
     </div>
   );
