@@ -3,34 +3,48 @@
   padding: 0;
 }
 .card {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 400px;
-  background-color: white;
+  width: 350px;
+  background-color: blue;
+
   border-radius: 15px;
   padding: 15px;
+  cursor: pointer;
 }
 .card:hover {
   position: relative;
   bottom: 2px;
   box-shadow: 0px 5px 10px 2px darkgrey;
 }
-.card-content {
+.cardContent {
   display: flex;
   flex-direction: column;
   gap: 20px;
   width: 360px;
   text-align: justify;
 }
-.card-content_text {
-  color: gray;
-}
-.card-content_date {
-  font-weight: bold;
-  color: royalblue;
-}
 img {
   height: 150px;
   border-radius: 15px;
+}
+.cardInfo {
+  height: 110px;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  color: white;
+}
+.cardContentText {
+  color: darkgray;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cardContentDate {
+  font-weight: bold;
+  color: white;
 }

@@ -1,20 +1,29 @@
-import React from "react";
+import React, { FC } from "react";
 import "./Card.css";
 
-const Card = (props: any) => {
+type CardProps = {
+  image?: string;
+  title: string;
+  text: string;
+  date: string;
+};
+
+const Card: FC<CardProps> = (props) => {
   return (
     <div className="card">
-      <div className="card-content">
+      <div className="cardContent">
         {props.image ? (
           <img src={props.image} />
         ) : (
           <img src={require("../../assets/no-img-bg.jpg")} />
         )}
-        <h3 className="card-content_title">{props.title}</h3>
-        <p className="card-content_text">{props.text}</p>
-        <p className="card-content_date">
-          {props.date.split("-").reverse().join(".")}
-        </p>
+        <div className="cardInfo">
+          <h3 className="cardContentTitle">{props.title}</h3>
+          <p className="cardContentText">{props.text}</p>
+          <p className="cardContentDate">
+            {props.date.split("-").reverse().join(".")}
+          </p>
+        </div>
       </div>
     </div>
   );

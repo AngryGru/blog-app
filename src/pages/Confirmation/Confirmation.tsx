@@ -1,25 +1,46 @@
 import React from "react";
 import "./Confirmation.css";
 import Button from "../../components/Button";
-import Link from "../../components/Link";
+import { Theme, useThemeContext } from "../../context/themeModeContext";
+import classNames from "classnames";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 const Confirmation = (props: any) => {
+  const { theme } = useThemeContext();
+  const isLightTheme = theme === Theme.Light;
+
+  const location: any = useLocation();
+  // const navigate = useNavigate()
+
+  const onHomeClick = () => {
+    localStorage.setItem("isLoggedIn", "true");
+    window.location.replace("/cards-list");
+  };
+
   return (
-    <div className="confirmation_container">
-      <div className="confirmation_content">
-        <h2 className="confirmation_title">{props.title}</h2>
-        <p className="confirmation_text">
-          Please activate your account with <br /> the activation link in the
-          email{" "}
-          <Link
-            className="link"
-            href={"test@gmail.com"}
-            title={"test@gmail.com"}
-          />{" "}
-          <br />
-          Please check your email
-        </p>
-        <Button value={"Home"} />
+    <div
+      className={classNames("confirmationContainer", {
+        ["confirmationContainerDark"]: !isLightTheme,
+      })}
+    >
+      <div className="confirmationContent">
+        <h2 className="confirmationTitle">Registration Confirmation</h2>
+        <div className="confirmationText">
+          <p>Please activate your account with</p>
+          <p>
+            the activation link in the email{" "}
+            <Button
+              className={"btnLink"}
+              value={location?.state?.email ?? ""}
+            />
+          </p>
+          <p>Please check your email</p>
+        </div>
+        <Button
+          className={"btn confirmBtn"}
+          value={"Home"}
+          onClick={onHomeClick}
+        />
       </div>
     </div>
   );

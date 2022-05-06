@@ -1,0 +1,97 @@
+/* Position and sizing of burger button */
+.bm-burger-button {
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  left: 30px;
+  top: 13px;
+}
+.barsLight {
+  color: blue;
+}
+.barsLight:hover {
+  color: darkblue;
+}
+
+.barsDark {
+  color: gold;
+}
+.barsDark:hover {
+  color: goldenrod;
+}
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 25px;
+  width: 25px;
+}
+/* Color/shape of close button cross */
+.crossLight {
+  color: white;
+}
+.crossDark {
+  color: gold;
+}
+/*
+  Sidebar wrapper styles
+  Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
+  */
+.bm-menu-wrap {
+  position: fixed;
+  height: 100%;
+}
+/* General sidebar styles */
+.menuLight {
+  background: #1f51ff;
+  padding: 25px 15px 0;
+  font-size: 25px;
+}
+.menuLight::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+.menuDark {
+  background: black;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  padding: 20px;
+}
+/* Individual item */
+.bm-item {
+  display: block;
+}
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Individual item */
+.lightItem {
+  display: block;
+  color: white;
+  margin-bottom: 20px;
+  text-align: left;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.lightItem:hover {
+  color: lightblue;
+}
+a.bm-item.lightItem.menu-item.active {
+  color: navy;
+}
+a.bm-item.darkItem.menu-item.active {
+  color: goldenrod;
+}
+.darkItem {
+  display: block;
+  color: white;
+  margin-bottom: 20px;
+  text-align: left;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.darkItem:hover {
+  color: gold;
+}

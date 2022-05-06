@@ -2,28 +2,45 @@
   margin: 0;
   padding: 0;
 }
-.confirmation_container {
-  background-color: white;
-  width: 100%;
-  height: 100vh;
+.confirmationContainer {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 60px;
 }
-.confirmation_content {
+.confirmBtn {
+  width: 70%;
+}
+.confirmationContent {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 30px;
   padding: 30px;
-  width: 40%;
+  text-align: center;
 }
-.confirmation_title {
+.confirmationTitle {
   color: #1f51ff;
 }
 .link {
   font-weight: normal;
   color: #1f51ff;
   text-decoration: none;
+}
+
+.confirmationContainerDark {
+  color: white;
+}
+
+.confirmationContainerDark .confirmationTitle {
+  color: gold;
+}
+.confirmationContainerDark .btnLink {
+  color: gold;
+}
+.confirmationContainerDark .btn {
+  color: black;
+  background-color: gold;
+  border-color: gold;
 }

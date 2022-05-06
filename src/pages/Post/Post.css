@@ -1,0 +1,23 @@
+.postPage {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 60px;
+}
+.postTitle {
+  color: blue;
+  font-weight: bold;
+  text-align: left;
+  font-size: 25px;
+}
+
+.postPageDark .postTitle {
+  color: gold;
+}
+.postPageDark .card {
+  background-color: black;
+}
+.postPageDark .cardContentDate,
+.postPageDark .cardContentTitle {
+  color: gold;
+}

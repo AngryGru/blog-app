@@ -1,78 +1,8 @@
 import React, { useState } from "react";
-import "./App.css";
-import PageHeader from "./components/PageHeader";
-import Template from "./pages/Template";
-import Authorization from "./pages/Authorization";
-import Confirmation from "./pages/Confirmation";
-import Posts from "./pages/Posts";
-import Post from "./pages/Post";
-import Information from "./pages/Information";
-import Router from "./pages/Router";
-
+import "./Information.css";
+import { Theme, useThemeContext } from "../../context/themeModeContext";
 import classNames from "classnames";
-import { ThemeModeProvider } from "./context/ThemeModeProvider";
-import { Theme } from "./context/themeModeContext";
 
-const MOCK_DATA = [
-  {
-    id: 0,
-    image:
-      "https://images.hdqwalls.com/download/triangles-colorful-background-nz-1920x1080.jpg",
-    text: "Lorem ipsum dolor sit amet consectetur.",
-    date: "2022-04-16",
-    lesson_num: 0,
-    title: "What is Lorem Ipsum?",
-    author: 0,
-  },
-  {
-    id: 1,
-    image:
-      "https://cdn.pixabay.com/photo/2016/06/02/02/33/triangles-1430105__480.png",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, eligendi.",
-    date: "2022-03-10",
-    lesson_num: 1,
-    title: "What is Lorem?",
-    author: 1,
-  },
-  {
-    id: 2,
-    text: "Dolorum, eligendi. Lorem consectetur adipisicing elit.",
-    date: "2022-06-18",
-    lesson_num: 2,
-    title: "What is Ipsum?",
-    author: 2,
-  },
-  {
-    id: 3,
-    image:
-      "https://images.hdqwalls.com/download/colorful-polygons-1920x1080.jpg",
-    text: "Sit amet consectetur lorem ipsum dolor adipisicing elit. Eligendi, dolorum.",
-    date: "2022-05-08",
-    lesson_num: 3,
-    title: "What is Dolorum?",
-    author: 3,
-  },
-  {
-    id: 4,
-    image:
-      "https://www.teahub.io/photos/full/128-1284836_desktop-wallpaper-laptop-mac-macbook-air-vk42-rainbow.jpg",
-    text: "Sit amet consectetur lorem ipsum dolor adipisicing elit. Eligendi, dolorum.",
-    date: "2022-05-09",
-    lesson_num: 4,
-    title: "Avocado runs the world!",
-    author: 4,
-  },
-  {
-    id: 5,
-    image:
-      "https://stackify.com/wp-content/uploads/2017/11/OOPS-concept-abstraction-881x441.jpg",
-    text: "Sit amet consectetur lorem ipsum dolor adipisicing elit. Eligendi, dolorum. Eligendi, dolorum.",
-    date: "2022-05-07",
-    lesson_num: 5,
-    title: "The Voyager's Courage",
-    author: 5,
-  },
-];
 const MOCK_INFO = [
   [
     "Aliquam dapibus urna convallis molestie iaculis. Quisque congue quam auctor libero bibendum, sit amet convallis orci pharetra. Mauris egestas nec ante ac pulvinar. Proin porttitor viverra erat. Sed vestibulum elit a orci facilisis, sed mollis nibh commodo. In ut libero vel nulla blandit faucibus. Proin placerat porttitor nisl.",
@@ -91,25 +21,56 @@ const MOCK_INFO = [
   ],
 ];
 
-const App = () => {
-  const [theme, setTheme] = useState(Theme.Light);
-
-  const onChangeTheme = (value: Theme) => {
-    setTheme(value);
-  };
+const Information = () => {
+  const { theme, onChangeTheme = () => {} } = useThemeContext();
   const isLightTheme = theme === Theme.Light;
 
+  const [activeTab, setActiveTab] = useState("tab_1");
+  const onClickActiveTab = (name: string) => {
+    setActiveTab(name);
+  };
+
+  const isActiveTab_1 = activeTab === "tab_1";
+  const isActiveTab_2 = activeTab === "tab_2";
+  const isActiveTab_3 = activeTab === "tab_3";
+
+  const TABS = [
+    { tabName: "Tab 1", id: "tab_1", content: MOCK_INFO[0] },
+    { tabName: "Tab 2", id: "tab_2", content: MOCK_INFO[1] },
+    { tabName: "Tab 3", id: "tab_3", content: MOCK_INFO[2] },
+  ];
+
   return (
-    <ThemeModeProvider theme={theme} onChangeTheme={onChangeTheme}>
-      <div
-        className={classNames("App", {
-          ["AppDark"]: !isLightTheme,
+    <div
+      className={classNames("informationContainer", {
+        ["informationContainerDark"]: !isLightTheme,
+      })}
+    >
+      <div className="informationTitle">Information</div>
+      <div className="informationTabs">
+        {TABS.map((tab) => {
+          return (
+            <button
+              key={tab.id}
+              className={classNames("infBtn", {
+                ["infBtnActive"]: tab.id === activeTab,
+              })}
+              onClick={() => onClickActiveTab(tab.id)}
+            >
+              {tab.tabName}
+            </button>
+          );
         })}
-      >
-        <Router />
       </div>
-    </ThemeModeProvider>
+      <div className="informationBody">
+        {isActiveTab_1
+          ? MOCK_INFO[0]
+          : isActiveTab_2
+          ? MOCK_INFO[1]
+          : MOCK_INFO[2]}
+      </div>
+    </div>
   );
 };
 
-export default App;
+export default Information;

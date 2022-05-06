@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.templateContainer {
+  color: gray;
+  margin-top: 60px;
+}
+.templateContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.templateTitle {
+  color: #1f51ff;
+}
+
+.templateContainerDark {
+  color: white;
+}
+.templateContainerDark .templateTitle {
+  color: gold;
+}
+.templateContainerDark .btn {
+  color: black;
+  background-color: gold;
+  border-color: gold;
+}
