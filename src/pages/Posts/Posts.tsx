@@ -60,7 +60,7 @@ const Posts = () => {
       id: 5,
       image:
         "https://stackify.com/wp-content/uploads/2017/11/OOPS-concept-abstraction-881x441.jpg",
-      text: "Sit amet consectetur lorem ipsum dolor adipisicing elit. Eligendi, dolorum. Eligendi, dolorum.",
+      text: "Sit amet consectetur lorem ipsum dolor adipisicing elit. Eligendi, dolorum.  Sit amet consectetur lorem ipsum dolor adipisicing elit. Sit amet consectetur lorem ipsum dolor adipisicing elit. Eligendi, dolorum.",
       date: "2022-05-07",
       lesson_num: 5,
       title: "The Voyager's Courage",
