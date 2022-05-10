@@ -67,6 +67,10 @@ const Posts = () => {
       author: 5,
     },
   ];
+
+  const addBtnClick = () => {
+    window.location.replace("/add-post");
+  };
   return (
     <div
       className={classNames("postsPage", {
@@ -75,7 +79,9 @@ const Posts = () => {
     >
       <div className="postsHeader">
         <p>My posts</p>
-        <button className="addBtn">Add</button>
+        <button className="addBtn" onClick={addBtnClick}>
+          Add
+        </button>
       </div>
       <CardList data={LIST_DATA} />
     </div>

@@ -8,6 +8,7 @@ body::-webkit-scrollbar {
 }
 .App {
   margin: 0 auto;
+  height: 100%;
 }
 .AppDark {
   background-color: #202020;

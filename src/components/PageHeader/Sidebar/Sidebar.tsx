@@ -38,9 +38,9 @@ export default (props: any) => {
       <NavLink className="menu-item" to="info">
         My posts
       </NavLink>
-      <a className="menu-item" href="#">
+      <NavLink className="menu-item" to="add-post">
         Add posts
-      </a>
+      </NavLink>
       <a className="menu-item" href="#" onClick={() => setModalActive(true)}>
         Log out
       </a>

@@ -80,25 +80,25 @@ const Post = () => {
         ["postPageDark"]: !isLightTheme,
       })}
     >
-      {postData && (
+      {
         <div className="postContainer">
-          <div className="postTitle">{postData.title}</div>
+          <div className="postTitle">{postData!.title}</div>
           <div className="postContent">
-            {postData.image ? (
-              <img className="postImg" src={postData.image} alt="post-image" />
+            {postData!.image ? (
+              <img className="postImg" src={postData!.image} alt="post-image" />
             ) : (
               <img
                 className="postImg"
                 src={require("../../assets/no-img-bg.jpg")}
               />
             )}
-            <div className="postText">{postData.text}</div>
+            <div className="postText">{postData!.text}</div>
           </div>
           <div className="postDate">
-            {postData.date.split("-").reverse().join(".")}
+            {postData!.date.split("-").reverse().join(".")}
           </div>
         </div>
-      )}
+      }
     </div>
   );
 };
