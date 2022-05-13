@@ -139,11 +139,13 @@ const getSortedCountries: GetSortedCountries = (countries) => {
 type GetCurrencyArray = (countries: Array<Country>) => Array<string>;
 
 const getCurrencyArray: GetCurrencyArray = (countries) => {
-  let currencyArray: Array<string> = [];
-  countries.forEach((item) => {
-    currencyArray.push(item.currency_name);
-  });
-  console.log(currencyArray);
+  // let currencyArray: Array<string> = [];
+  // countries.forEach((item) => {
+  //   currencyArray.push(item.currency_name);
+  // });
+  // console.log(currencyArray);
+  // return currencyArray;
+  let currencyArray = countries.map((item) => item.currency_name);
   return currencyArray;
 };
 
@@ -151,12 +153,14 @@ const getCurrencyArray: GetCurrencyArray = (countries) => {
 type GetCitiesArray = (countries: Array<Country>) => Array<string>;
 
 const getCitiesArray: GetCitiesArray = (countries) => {
-  let citiesArray: Array<string> = [];
-  countries.forEach((item) => {
-    citiesArray.push(item.currency_name);
-  });
-  citiesArray.sort();
-  console.log(citiesArray);
+  // let citiesArray: Array<string> = [];
+  // countries.forEach((item) => {
+  //   citiesArray.push(item.city);
+  // });
+  // citiesArray.sort();
+  // console.log(citiesArray);
+  // return citiesArray;
+  let citiesArray = countries.map((item) => item.city).sort();
   return citiesArray;
 };
 

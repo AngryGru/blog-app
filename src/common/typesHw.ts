@@ -55,13 +55,10 @@ const getNames: GetNames = (users) => {
 type GetCarAmount = (users: Array<User>) => number;
 
 const getCarAmount: GetCarAmount = (users) => {
-  let cars = [];
+  let carAmount = 0;
   users.forEach((item) => {
-    if (item.cars) {
-      item.cars.forEach((car) => cars.push(car));
-    }
+    item.cars ? (carAmount += item.cars.length) : item;
   });
-  let carAmount = cars.length;
   console.log(carAmount);
   return carAmount;
 };

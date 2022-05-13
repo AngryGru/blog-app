@@ -68,7 +68,7 @@ const Posts = () => {
     },
   ];
 
-  const addBtnClick = () => {
+  const onAddBtnClick = () => {
     window.location.replace("/add-post");
   };
   return (
@@ -79,7 +79,7 @@ const Posts = () => {
     >
       <div className="postsHeader">
         <p>My posts</p>
-        <button className="addBtn" onClick={addBtnClick}>
+        <button className="addBtn" onClick={onAddBtnClick}>
           Add
         </button>
       </div>
