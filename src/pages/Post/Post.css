@@ -1,23 +1,47 @@
 .postPage {
+  margin-top: 60px;
+  height: 100vh;
+}
+.postContainer {
+  width: 65%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  margin-top: 60px;
+
+  background-color: #1f51ff;
+  border-radius: 15px;
+  padding: 15px;
 }
 .postTitle {
-  color: blue;
+  color: white;
   font-weight: bold;
   text-align: left;
   font-size: 25px;
 }
+.postContent {
+  display: flex;
+  flex-wrap: wrap;
+}
+.postImg {
+  width: 40%;
+  height: auto;
+}
+.postText {
+  width: 60%;
+  text-align: justify;
+  padding-left: 30px;
+  color: darkgrey;
+}
+.postDate {
+  font-weight: bold;
+  color: white;
+}
 
-.postPageDark .postTitle {
+.postPageDark .postTitle,
+.postPageDark .postDate {
   color: gold;
 }
-.postPageDark .card {
+.postPageDark .postContainer {
   background-color: black;
-}
-.postPageDark .cardContentDate,
-.postPageDark .cardContentTitle {
-  color: gold;
 }

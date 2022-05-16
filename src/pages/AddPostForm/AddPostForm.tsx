@@ -1,0 +1,49 @@
+import React from "react";
+import "./AddPostForm.css";
+import Input from "../../components/Input";
+import { Theme, useThemeContext } from "../../context/themeModeContext";
+import classNames from "classnames";
+
+const AddPostForm = () => {
+  const { theme } = useThemeContext();
+  const isLightTheme = theme === Theme.Light;
+
+  const onSubmit = (e: any) => {
+    e.preventDefault();
+  };
+
+  return (
+    <div className="formContainer">
+      <form
+        onSubmit={onSubmit}
+        className={classNames("addPostForm", {
+          ["addPostFormDark"]: !isLightTheme,
+        })}
+      >
+        <h1>Create post</h1>
+        <label>
+          <div>Post title:</div>
+          <Input
+            className={"postTitleInput"}
+            type={"text"}
+            placeholder={"Post title"}
+          />
+        </label>
+        <label>
+          <div>Post text:</div>
+          <textarea className={"postTextarea"} placeholder={"Post text"} />
+        </label>
+        <label>
+          <div>Add image:</div>
+          <Input className={"postImgInput"} type={"file"} />
+        </label>
+        <div className="formActions">
+          <button>Add</button>
+          <button>Cancel</button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default AddPostForm;

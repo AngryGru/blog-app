@@ -1,0 +1,77 @@
+.formContainer {
+  height: 100vh;
+}
+.addPostForm {
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+  padding: 30px;
+  width: 40%;
+  align-items: center;
+  border: 3px solid #1f51ff;
+  border-radius: 15px;
+}
+.addPostForm h1 {
+  color: #1f51ff;
+}
+.addPostForm label {
+  display: flex;
+  justify-content: flex-start;
+  text-align: left;
+  min-width: 100%;
+}
+.postTitleInput {
+  width: 100%;
+}
+.postTextarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border: 2px solid #1f51ff;
+  border-radius: 20px;
+  outline: none;
+  background-color: #ebf4fa;
+  font-family: inherit;
+  font-size: 14px;
+  resize: none;
+}
+.postImgInput {
+  width: 100%;
+}
+.formActions {
+  display: flex;
+  gap: 40px;
+}
+.formActions button {
+  width: 80px;
+  height: 30px;
+  border: 2px solid #1f51ff;
+  background-color: #1f51ff;
+  color: white;
+  outline: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 15px;
+  text-align: center;
+}
+
+.addPostFormDark {
+  border-color: gold;
+  color: white;
+}
+.addPostFormDark h1 {
+  color: gold;
+}
+.addPostFormDark input,
+.addPostFormDark textarea {
+  border-color: gold;
+  background-color: #505050;
+  color: white;
+}
+.addPostFormDark button {
+  background-color: gold;
+  border-color: gold;
+  color: black;
+}
