@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import "./App.css";
-import PageHeader from "./components/PageHeader";
-import Template from "./pages/Template";
-import Authorization from "./pages/Authorization";
-import Confirmation from "./pages/Confirmation";
-import Posts from "./pages/Posts";
-import Post from "./pages/Post";
-import Information from "./pages/Information";
+// import PageHeader from "./components/PageHeader";
+// import Template from "./pages/Template";
+// import Authorization from "./pages/Authorization";
+// import Confirmation from "./pages/Confirmation";
+// import Posts from "./pages/Posts";
+// import Post from "./pages/Post";
+// import Information from "./pages/Information";
 import Router from "./pages/Router";
-
 import classNames from "classnames";
 import { ThemeModeProvider } from "./context/ThemeModeProvider";
 import { Theme } from "./context/themeModeContext";
+
+import { Provider } from "react-redux";
+import { store } from "./redux/store";
 
 const MOCK_DATA = [
   {
@@ -100,15 +102,17 @@ const App = () => {
   const isLightTheme = theme === Theme.Light;
 
   return (
-    <ThemeModeProvider theme={theme} onChangeTheme={onChangeTheme}>
-      <div
-        className={classNames("App", {
-          ["AppDark"]: !isLightTheme,
-        })}
-      >
-        <Router />
-      </div>
-    </ThemeModeProvider>
+    <Provider store={store}>
+      <ThemeModeProvider theme={theme} onChangeTheme={onChangeTheme}>
+        <div
+          className={classNames("App", {
+            ["AppDark"]: !isLightTheme,
+          })}
+        >
+          <Router />
+        </div>
+      </ThemeModeProvider>
+    </Provider>
   );
 };
 
