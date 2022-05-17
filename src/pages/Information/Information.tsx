@@ -24,8 +24,10 @@ const MOCK_INFO = [
 ];
 
 const Information = () => {
-  const { theme, onChangeTheme = () => {} } = useThemeContext();
-  const isLightTheme = theme === Theme.Light;
+  // const { theme } = useThemeContext();
+  // const isLightTheme = theme === Theme.Light;
+  const theme = useSelector((state: any) => state.themeSwitchReducer.theme);
+  const isLightTheme = theme === "lightTheme";
 
   const TABS = [
     { tabName: "Tab 1", id: "tab_1", content: MOCK_INFO[0] },
@@ -34,7 +36,9 @@ const Information = () => {
   ];
 
   const dispatch = useDispatch();
-  const activeTab = useSelector((state: any) => state.activeTab);
+  const activeTab = useSelector(
+    (state: any) => state.tabSwitchReducer.activeTab
+  );
 
   const onClickActiveTab = (name: string) => {
     switch (true) {

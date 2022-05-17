@@ -8,10 +8,14 @@ import Modal from "../../Modal";
 
 import { Theme, useThemeContext } from "../../../context/themeModeContext";
 import classNames from "classnames";
+import { useSelector } from "react-redux";
 
 export default (props: any) => {
-  const { theme, onChangeTheme = () => {} } = useThemeContext();
-  const isLightTheme = theme === Theme.Light;
+  // const { theme, onChangeTheme = () => {} } = useThemeContext();
+  // const isLightTheme = theme === Theme.Light;
+
+  const theme = useSelector((state: any) => state.themeSwitchReducer.theme);
+  const isLightTheme = theme === "lightTheme";
 
   const [modalActive, setModalActive] = useState(false);
 

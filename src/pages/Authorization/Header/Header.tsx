@@ -4,6 +4,8 @@ import Button from "../../../components/Button";
 import { Theme, useThemeContext } from "../../../context/themeModeContext";
 import classNames from "classnames";
 
+import { useSelector } from "react-redux";
+
 type HeaderProps = {
   onClick: (name: string) => void;
   activeTab: string;
@@ -12,8 +14,11 @@ type HeaderProps = {
 const Header: FC<HeaderProps> = ({ onClick, activeTab }) => {
   const isLoginActive = activeTab === "login";
 
-  const { theme } = useThemeContext();
-  const isLightTheme = theme === Theme.Light;
+  // const { theme } = useThemeContext();
+  // const isLightTheme = theme === Theme.Light;
+
+  const theme = useSelector((state: any) => state.themeSwitchReducer.theme);
+  const isLightTheme = theme === "lightTheme";
 
   return (
     <div

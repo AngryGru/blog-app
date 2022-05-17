@@ -4,7 +4,7 @@ import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 import { Theme, useThemeContext } from "../../../context/themeModeContext";
 import classNames from "classnames";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -16,15 +16,6 @@ const LoginForm = () => {
     "This field cannot be empty"
   );
   const [formValid, setFormValid] = useState(false);
-
-  const dispatch = useDispatch();
-  const value = useSelector((state: any) => state.value);
-
-  const onClick = (isPlus: boolean) => {
-    const PLUS_ACTION = { type: "counter/incremented" };
-    const MINUS_ACTION = { type: "counter/decremented" };
-    dispatch(isPlus ? PLUS_ACTION : MINUS_ACTION);
-  };
 
   useEffect(() => {
     if (emailError || passwordError) {
@@ -70,8 +61,10 @@ const LoginForm = () => {
     e.preventDefault();
   };
 
-  const { theme } = useThemeContext();
-  const isLightTheme = theme === Theme.Light;
+  // const { theme } = useThemeContext();
+  // const isLightTheme = theme === Theme.Light;
+  const theme = useSelector((state: any) => state.themeSwitchReducer.theme);
+  const isLightTheme = theme === "lightTheme";
 
   return (
     <form
@@ -123,17 +116,6 @@ const LoginForm = () => {
         Forgot your password?{" "}
         <Button className={"btnLink"} value={"Reset password"} />
       </p>
-      <Button
-        className={"btnLink"}
-        value={"Plus"}
-        onClick={() => onClick(true)}
-      />
-      <Button
-        className={"btnLink"}
-        value={"Minus"}
-        onClick={() => onClick(false)}
-      />
-      <div style={{ fontSize: 20, fontWeight: "bold" }}>{value}</div>
     </form>
   );
 };

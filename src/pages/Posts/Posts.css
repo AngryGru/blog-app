@@ -36,7 +36,9 @@
   font-size: 15px;
   text-align: center;
 }
-
+.postsPageDark {
+  background-color: #202020;
+}
 .postsPageDark .postsHeader {
   color: gold;
 }

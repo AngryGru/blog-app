@@ -6,15 +6,28 @@ import { Outlet } from "react-router-dom";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import classNames from "classnames";
 
-const PageHeader = () => {
-  const { theme, onChangeTheme = () => {} } = useThemeContext();
-  const isLightTheme = theme === Theme.Light;
+import { useDispatch, useSelector } from "react-redux";
 
-  const onClickTheme = () => {
-    theme === Theme.Light
-      ? onChangeTheme(Theme.Dark)
-      : onChangeTheme(Theme.Light);
+const PageHeader = () => {
+  // const { theme, onChangeTheme = () => {} } = useThemeContext();
+  // const isLightTheme = theme === Theme.Light;
+
+  // const onClickTheme = () => {
+  //   theme === Theme.Light
+  //     ? onChangeTheme(Theme.Dark)
+  //     : onChangeTheme(Theme.Light);
+  // };
+
+  const theme = useSelector((state: any) => state.themeSwitchReducer.theme);
+  const dispatch = useDispatch();
+
+  const onClickTheme = (pageTheme: string) => {
+    const lightTheme = { type: "isLightTheme" };
+    const darkTheme = { type: "isDarkTheme" };
+    dispatch(pageTheme === "lightTheme" ? darkTheme : lightTheme);
   };
+
+  const isLightTheme = theme === "lightTheme";
 
   return (
     <div>
@@ -34,7 +47,7 @@ const PageHeader = () => {
           </div>
           <div className="themeToggle">
             <label className="switch">
-              <input type="checkbox" onClick={onClickTheme} />
+              <input type="checkbox" onClick={() => onClickTheme(theme)} />
               <span className="slider"></span>
             </label>
           </div>

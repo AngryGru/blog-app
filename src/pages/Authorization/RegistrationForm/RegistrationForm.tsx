@@ -2,11 +2,12 @@ import React, { useState, useEffect, FC } from "react";
 import "./RegistrationForm.css";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
-
 import { useNavigate } from "react-router-dom";
 
 import { Theme, useThemeContext } from "../../../context/themeModeContext";
 import classNames from "classnames";
+
+import { useSelector } from "react-redux";
 
 type RegistrationFormProps = {
   onLoginLinkClick: (name: string) => void;
@@ -109,8 +110,10 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
     });
   };
 
-  const { theme } = useThemeContext();
-  const isLightTheme = theme === Theme.Light;
+  // const { theme } = useThemeContext();
+  // const isLightTheme = theme === Theme.Light;
+  const theme = useSelector((state: any) => state.themeSwitchReducer.theme);
+  const isLightTheme = theme === "lightTheme";
 
   return (
     <form

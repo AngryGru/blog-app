@@ -3,10 +3,14 @@ import "./Posts.css";
 import CardList from "../../components/CardList";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import classNames from "classnames";
+import { useSelector } from "react-redux";
 
 const Posts = () => {
-  const { theme } = useThemeContext();
-  const isLightTheme = theme === Theme.Light;
+  // const { theme } = useThemeContext();
+  // const isLightTheme = theme === Theme.Light;
+  const theme = useSelector((state: any) => state.themeSwitchReducer.theme);
+  const isLightTheme = theme === "lightTheme";
+
   const LIST_DATA = [
     {
       id: 0,

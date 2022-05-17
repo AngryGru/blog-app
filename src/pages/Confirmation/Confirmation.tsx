@@ -4,10 +4,14 @@ import Button from "../../components/Button";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import classNames from "classnames";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Confirmation = (props: any) => {
-  const { theme } = useThemeContext();
-  const isLightTheme = theme === Theme.Light;
+  // const { theme } = useThemeContext();
+  // const isLightTheme = theme === Theme.Light;
+
+  const theme = useSelector((state: any) => state.themeSwitchReducer.theme);
+  const isLightTheme = theme === "lightTheme";
 
   const location: any = useLocation();
   // const navigate = useNavigate()

@@ -48,7 +48,9 @@
   width: 0;
   height: 0;
 }
-
+.informationContainerDark {
+  background-color: #202020;
+}
 .informationContainerDark .informationTitle {
   color: gold;
 }

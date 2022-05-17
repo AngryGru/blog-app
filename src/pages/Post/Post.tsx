@@ -4,10 +4,14 @@ import Card from "../../components/Card";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import { useParams } from "react-router-dom";
 import classNames from "classnames";
+import { useSelector } from "react-redux";
 
 const Post = () => {
-  const { theme, onChangeTheme = () => {} } = useThemeContext();
-  const isLightTheme = theme === Theme.Light;
+  // const { theme, onChangeTheme = () => {} } = useThemeContext();
+  // const isLightTheme = theme === Theme.Light;
+
+  const theme = useSelector((state: any) => state.themeSwitchReducer.theme);
+  const isLightTheme = theme === "lightTheme";
 
   const LIST_DATA = [
     {
