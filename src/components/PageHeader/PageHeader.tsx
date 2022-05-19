@@ -22,9 +22,10 @@ const PageHeader = () => {
   const dispatch = useDispatch();
 
   const onClickTheme = (pageTheme: string) => {
-    const lightTheme = { type: "isLightTheme" };
-    const darkTheme = { type: "isDarkTheme" };
+    const lightTheme = { type: "isLightTheme", theme: "lightTheme" };
+    const darkTheme = { type: "isDarkTheme", theme: "darkTheme" };
     dispatch(pageTheme === "lightTheme" ? darkTheme : lightTheme);
+    console.log(theme);
   };
 
   const isLightTheme = theme === "lightTheme";

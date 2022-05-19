@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, BrowserRouter, Routes } from "react-router-dom";
+import { Route, BrowserRouter, Routes, Navigate } from "react-router-dom";
 import PageHeader from "../../components/PageHeader";
 import Posts from "../Posts";
 import Post from "../Post";
@@ -21,11 +21,13 @@ const Router = () => {
             <Route path="info" element={<Information />} />
             <Route path="add-post" element={<AddPostForm />} />
           </Route>
+          <Route path="*" element={<Navigate to={"/"} replace />} />
         </Routes>
       ) : (
         <Routes>
           <Route path={"/auth"} element={<Authorization />}></Route>
           <Route path={"/confirm"} element={<Confirmation />}></Route>
+          <Route path="*" element={<Navigate to={"/auth"} replace />} />
         </Routes>
       )}
     </BrowserRouter>

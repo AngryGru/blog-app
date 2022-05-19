@@ -2,9 +2,12 @@ import React from "react";
 import "./CardList.css";
 import Card from "../Card";
 import { Link } from "react-router-dom";
+import { Card as CardType } from "../../common/types";
 
 const CardList = (props: any) => {
-  const listCards = props.data.map((item: any) => {
+  const onCardClick = (item: CardType) => {};
+
+  const listCards = props.data.map((item: CardType) => {
     return (
       <Link key={item.id} to={`/cards-list/${item.id}`}>
         <Card
@@ -13,6 +16,7 @@ const CardList = (props: any) => {
           title={item.title}
           text={item.text}
           date={item.date}
+          onClick={() => onCardClick(item)}
         />
       </Link>
     );

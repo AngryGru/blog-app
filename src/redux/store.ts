@@ -5,6 +5,10 @@ import {
 } from "redux";
 import tabSwitchReducer from "./reducers/tabSwitchReducer";
 import themeSwitchReducer from "./reducers/themeSwitchReducer";
+import postsReducer from "./reducers/postsReducer";
+import authReducer from "./reducers/authReducer";
+
+import { configureStore } from "@reduxjs/toolkit";
 
 declare global {
   interface Window {
@@ -16,6 +20,9 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const rootReducer = combineReducers({
   tabSwitchReducer,
   themeSwitchReducer,
+
+  posts: postsReducer,
+  auth: authReducer,
 });
 
 // function counterReducer(state = { value: 0 }, action: any) {
@@ -29,4 +36,8 @@ const rootReducer = combineReducers({
 //   }
 // }
 
-export const store = createStore(rootReducer);
+// export const store = createStore(rootReducer);
+
+export const store = configureStore({
+  reducer: rootReducer,
+});

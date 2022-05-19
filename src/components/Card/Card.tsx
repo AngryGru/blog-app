@@ -6,11 +6,12 @@ type CardProps = {
   title: string;
   text: string;
   date: string;
+  onClick?: () => void;
 };
 
 const Card: FC<CardProps> = (props) => {
   return (
-    <div className="card">
+    <div className="card" onClick={props.onClick}>
       <div className="cardContent">
         {props.image ? (
           <img src={props.image} />

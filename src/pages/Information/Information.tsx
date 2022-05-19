@@ -40,16 +40,23 @@ const Information = () => {
     (state: any) => state.tabSwitchReducer.activeTab
   );
 
+  const action = (type: string, value: string) => {
+    return {
+      type: type,
+      payload: value,
+    };
+  };
+
   const onClickActiveTab = (name: string) => {
     switch (true) {
       case name === "tab_1":
-        dispatch({ type: "activeTab_1" });
+        dispatch(action("activeTab_1", "tab_1"));
         break;
       case name === "tab_2":
-        dispatch({ type: "activeTab_2" });
+        dispatch(action("activeTab_2", "tab_2"));
         break;
       case name === "tab_3":
-        dispatch({ type: "activeTab_3" });
+        dispatch(action("activeTab_3", "tab_3"));
         break;
     }
   };
