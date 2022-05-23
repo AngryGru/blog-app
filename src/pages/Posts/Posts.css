@@ -36,16 +36,44 @@
   font-size: 15px;
   text-align: center;
 }
+
+.postsPage .modalContent {
+  width: 50%;
+  gap: 0;
+}
+.imageContainer img {
+  height: 250px;
+}
+.closeBtnContainer {
+  display: flex;
+  justify-content: right;
+}
+.closeBtn {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: #1f51ff;
+  font-size: 25px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .postsPageDark {
   background-color: #202020;
 }
-.postsPageDark .postsHeader {
+.postsPageDark .postsHeader,
+.postsPageDark .closeBtn {
   color: gold;
 }
 .postsPageDark .addBtn {
   background-color: gold;
   border-color: gold;
   color: black;
+}
+.postsPageDark .cardActions .actions {
+  color: gold;
 }
 .postsPageDark .card {
   background-color: black;

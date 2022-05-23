@@ -19,6 +19,12 @@ export default (props: any) => {
 
   const [modalActive, setModalActive] = useState(false);
 
+  const onLogOutBtnClick = () => {
+    localStorage.setItem("isLoggedIn", "");
+    window.location.replace("/auth");
+    setModalActive(false);
+  };
+
   return (
     <Menu
       customBurgerIcon={<FiMenu />}
@@ -48,7 +54,20 @@ export default (props: any) => {
       <a className="menu-item" href="#" onClick={() => setModalActive(true)}>
         Log out
       </a>
-      <Modal active={modalActive} setActive={setModalActive} />
+      <Modal active={modalActive} setActive={setModalActive}>
+        <p className="modalText">Are you sure you want to log out?</p>
+        <div className="modalActions">
+          <button className="logoutSubmitBtn" onClick={onLogOutBtnClick}>
+            OK
+          </button>
+          <button
+            className="logoutCancelBtn"
+            onClick={() => setModalActive(false)}
+          >
+            Cancel
+          </button>
+        </div>
+      </Modal>
     </Menu>
   );
 };

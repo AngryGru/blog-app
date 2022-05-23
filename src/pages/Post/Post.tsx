@@ -93,7 +93,7 @@ const Post = () => {
             ) : (
               <img
                 className="postImg"
-                src={require("../../assets/no-img-bg.jpg")}
+                src="https://st2.depositphotos.com/1031174/12280/i/950/depositphotos_122808092-stock-photo-grey-textured-background.jpg"
               />
             )}
             <div className="postText">{postData!.text}</div>
