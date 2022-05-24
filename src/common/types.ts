@@ -6,7 +6,13 @@ export type Card = {
   title: string;
   text: string;
   date: string;
+  saved?: boolean;
 };
+
+export enum LikeStatus {
+  Like = "like",
+  Dislike = "dislike",
+}
 
 // type User = {
 //   id: number;

@@ -9,9 +9,13 @@ import { Theme, useThemeContext } from "../../context/themeModeContext";
 import classNames from "classnames";
 import { useSelector } from "react-redux";
 import { PostsSelectors } from "../../redux/reducers/postsReducer";
-
+import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
+import { IoBookmarkOutline } from "react-icons/io5";
 import Modal from "../../components/Modal";
-import { setSelectedImage } from "../../redux/reducers/postsReducer";
+import {
+  setSelectedImage,
+  setPostsTab,
+} from "../../redux/reducers/postsReducer";
 
 const LIST_DATA = [
   {
@@ -77,9 +81,14 @@ const LIST_DATA = [
 const Posts = () => {
   const dispatch = useDispatch();
 
+  const activeTab = useSelector(PostsSelectors.getPostsTab);
   const cardsList = useSelector((state) =>
-    PostsSelectors.getCards(state, "all/saved/liked")
+    PostsSelectors.getCards(state, activeTab)
   );
+
+  const onTabClick = (tab: string) => {
+    dispatch(setPostsTab(tab));
+  };
 
   useEffect(() => {
     dispatch(loadData(LIST_DATA));
@@ -103,6 +112,25 @@ const Posts = () => {
     dispatch(setSelectedImage(null));
   };
 
+  const POSTS_TABS = [
+    {
+      tabName: "All",
+      id: "allPosts",
+      className: "showAllTab",
+    },
+    {
+      tabName: <AiOutlineLike />,
+      id: "likedPosts",
+      className: "likeTab",
+    },
+    {
+      tabName: <AiOutlineDislike />,
+      id: "dislikedPosts",
+      className: "dislikeTab",
+    },
+    { tabName: <IoBookmarkOutline />, id: "savedPosts", className: "saveTab" },
+  ];
+
   return (
     <div
       className={classNames("postsPage", {
@@ -110,16 +138,27 @@ const Posts = () => {
       })}
     >
       <div className="postsHeader">
-        <p>My posts</p>
-        <button className="addBtn" onClick={onAddBtnClick}>
-          Add
-        </button>
-      </div>
-      <div className="postsTabs">
-        <button>All</button>
-        <button>Liked</button>
-        <button>Disliked</button>
-        <button>Saved</button>
+        <div className="postsHeaderTitle">
+          <p>My posts</p>
+          <button className="addBtn" onClick={onAddBtnClick}>
+            Add
+          </button>
+        </div>
+        <div className="postsHeaderTabs">
+          {POSTS_TABS.map((tab) => {
+            return (
+              <button
+                key={tab.id}
+                className={classNames(`tab ${tab.className}`, {
+                  ["activeTab"]: tab.id === activeTab,
+                })}
+                onClick={() => onTabClick(`${tab.id}`)}
+              >
+                {tab.tabName}
+              </button>
+            );
+          })}
+        </div>
       </div>
       <Modal active={modalActive} setActive={setModalActive}>
         <div className="closeBtnContainer">
@@ -138,31 +177,3 @@ const Posts = () => {
 };
 
 export default Posts;
-
-// return (
-//   <div
-//     className={classNames("postsPage", {
-//       ["postsPageDark"]: !isLightTheme,
-//     })}
-//   >
-//     <div className="postsHeader">
-//       <p>My posts</p>
-//       <button className="addBtn" onClick={onAddBtnClick}>
-//         Add
-//       </button>
-//     </div>
-//     <Modal active={modalActive} setActive={setModalActive}>
-//       {selectedCard && (
-//         <div style={{ background: "red", padding: "10px" }}>
-//           <Card {...selectedCard} />
-//         </div>
-//       )}
-//       <button
-//         onClick={() => setModalActive(false)}
-//       >
-//         Cancel
-//       </button>
-//     </Modal>
-//     <CardList data={LIST_DATA} />
-//   </div>
-// );

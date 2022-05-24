@@ -16,12 +16,50 @@
 .postsHeader {
   width: 100%;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: flex-start;
   gap: 30px;
   font-size: 25px;
   font-weight: bold;
   color: blue;
+
+  padding-left: 55px;
+}
+.postsHeaderTitle {
+  display: flex;
+  gap: 30px;
+  align-items: baseline;
+}
+.postsHeaderTabs {
+  display: flex;
+  gap: 20px;
+  align-self: flex-start;
+  flex-wrap: wrap;
+}
+.tab {
+  width: 80px;
+  height: 30px;
+  border: 2px solid #1f51ff;
+  background-color: #1f51ff;
+  color: white;
+  outline: none;
+  border-radius: 20px;
+  cursor: pointer;
+  text-align: center;
+
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.showAllTab {
+  font-size: 18px;
+}
+
+.activeTab {
+  border-color: #1f51ff;
+  color: #1f51ff;
+  background-color: white;
 }
 
 .addBtn {
@@ -72,6 +110,18 @@
   border-color: gold;
   color: black;
 }
+
+.postsPageDark .tab {
+  background-color: gold;
+  border-color: gold;
+  color: black;
+}
+.postsPageDark .activeTab {
+  background-color: black;
+  border-color: gold;
+  color: gold;
+}
+
 .postsPageDark .cardActions .actions {
   color: gold;
 }
