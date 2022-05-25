@@ -9,26 +9,14 @@ import classNames from "classnames";
 import { useDispatch, useSelector } from "react-redux";
 
 const PageHeader = () => {
-  // const { theme, onChangeTheme = () => {} } = useThemeContext();
-  // const isLightTheme = theme === Theme.Light;
+  const { theme, onChangeTheme = () => {} } = useThemeContext();
+  const isLightTheme = theme === Theme.Light;
 
-  // const onClickTheme = () => {
-  //   theme === Theme.Light
-  //     ? onChangeTheme(Theme.Dark)
-  //     : onChangeTheme(Theme.Light);
-  // };
-
-  const theme = useSelector((state: any) => state.themeSwitchReducer.theme);
-  const dispatch = useDispatch();
-
-  const onClickTheme = (pageTheme: string) => {
-    const lightTheme = { type: "isLightTheme", theme: "lightTheme" };
-    const darkTheme = { type: "isDarkTheme", theme: "darkTheme" };
-    dispatch(pageTheme === "lightTheme" ? darkTheme : lightTheme);
-    console.log(theme);
+  const onClickTheme = () => {
+    theme === Theme.Light
+      ? onChangeTheme(Theme.Dark)
+      : onChangeTheme(Theme.Light);
   };
-
-  const isLightTheme = theme === "lightTheme";
 
   return (
     <div>
@@ -48,7 +36,7 @@ const PageHeader = () => {
           </div>
           <div className="themeToggle">
             <label className="switch">
-              <input type="checkbox" onClick={() => onClickTheme(theme)} />
+              <input type="checkbox" onClick={() => onClickTheme()} />
               <span className="slider"></span>
             </label>
           </div>

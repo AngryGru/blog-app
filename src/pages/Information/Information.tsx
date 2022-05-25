@@ -28,10 +28,8 @@ const MOCK_INFO = [
 ];
 
 const Information = () => {
-  // const { theme } = useThemeContext();
-  // const isLightTheme = theme === Theme.Light;
-  const theme = useSelector((state: any) => state.themeSwitchReducer.theme);
-  const isLightTheme = theme === "lightTheme";
+  const { theme } = useThemeContext();
+  const isLightTheme = theme === Theme.Light;
 
   const TABS = [
     { tabName: "Tab 1", id: "tab_1", content: MOCK_INFO[0] },

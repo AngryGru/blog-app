@@ -3,13 +3,10 @@ import "./AddPostForm.css";
 import Input from "../../components/Input";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import classNames from "classnames";
-import { useSelector } from "react-redux";
 
 const AddPostForm = () => {
-  // const { theme } = useThemeContext();
-  // const isLightTheme = theme === Theme.Light;
-  const theme = useSelector((state: any) => state.themeSwitchReducer.theme);
-  const isLightTheme = theme === "lightTheme";
+  const { theme } = useThemeContext();
+  const isLightTheme = theme === Theme.Light;
 
   const onSubmit = (e: any) => {
     e.preventDefault();

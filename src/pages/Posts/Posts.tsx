@@ -94,10 +94,8 @@ const Posts = () => {
     dispatch(loadData(LIST_DATA));
   }, []);
 
-  // const { theme } = useThemeContext();
-  // const isLightTheme = theme === Theme.Light;
-  const theme = useSelector((state: any) => state.themeSwitchReducer.theme);
-  const isLightTheme = theme === "lightTheme";
+  const { theme } = useThemeContext();
+  const isLightTheme = theme === Theme.Light;
 
   const onAddBtnClick = () => {
     window.location.replace("/add-post");

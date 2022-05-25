@@ -7,11 +7,8 @@ import classNames from "classnames";
 import { useSelector } from "react-redux";
 
 const Post = () => {
-  // const { theme, onChangeTheme = () => {} } = useThemeContext();
-  // const isLightTheme = theme === Theme.Light;
-
-  const theme = useSelector((state: any) => state.themeSwitchReducer.theme);
-  const isLightTheme = theme === "lightTheme";
+  const { theme, onChangeTheme = () => {} } = useThemeContext();
+  const isLightTheme = theme === Theme.Light;
 
   const LIST_DATA = [
     {

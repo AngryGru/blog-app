@@ -61,10 +61,8 @@ const LoginForm = () => {
     e.preventDefault();
   };
 
-  // const { theme } = useThemeContext();
-  // const isLightTheme = theme === Theme.Light;
-  const theme = useSelector((state: any) => state.themeSwitchReducer.theme);
-  const isLightTheme = theme === "lightTheme";
+  const { theme } = useThemeContext();
+  const isLightTheme = theme === Theme.Light;
 
   return (
     <form

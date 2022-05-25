@@ -14,11 +14,8 @@ type HeaderProps = {
 const Header: FC<HeaderProps> = ({ onClick, activeTab }) => {
   const isLoginActive = activeTab === "login";
 
-  // const { theme } = useThemeContext();
-  // const isLightTheme = theme === Theme.Light;
-
-  const theme = useSelector((state: any) => state.themeSwitchReducer.theme);
-  const isLightTheme = theme === "lightTheme";
+  const { theme } = useThemeContext();
+  const isLightTheme = theme === Theme.Light;
 
   return (
     <div
