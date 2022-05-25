@@ -4,6 +4,10 @@ import { Theme, useThemeContext } from "../../context/themeModeContext";
 import classNames from "classnames";
 
 import { useDispatch, useSelector } from "react-redux";
+// import {
+//   setActiveTab,
+//   TabSelector,
+// } from "../../redux/reducers/tabSwitchReducer";
 
 const MOCK_INFO = [
   [
@@ -40,6 +44,8 @@ const Information = () => {
     (state: any) => state.tabSwitchReducer.activeTab
   );
 
+  // const activeTab = useSelector(TabSelector.getActiveTab);
+
   const action = (type: string, value: string) => {
     return {
       type: type,
@@ -48,17 +54,15 @@ const Information = () => {
   };
 
   const onClickActiveTab = (name: string) => {
-    switch (true) {
-      case name === "tab_1":
-        dispatch(action("activeTab_1", "tab_1"));
-        break;
-      case name === "tab_2":
-        dispatch(action("activeTab_2", "tab_2"));
-        break;
-      case name === "tab_3":
-        dispatch(action("activeTab_3", "tab_3"));
-        break;
-    }
+    dispatch(
+      name === "tab_1"
+        ? action("activeTab_1", "tab_1")
+        : name === "tab_2"
+        ? action("activeTab_2", "tab_2")
+        : action("activeTab_3", "tab_3")
+    );
+
+    // dispatch(setActiveTab(name));
   };
 
   return (

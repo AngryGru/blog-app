@@ -72,11 +72,11 @@ export const PostsSelectors = {
     const cards = state.posts.cardsList;
     switch (filter) {
       case "likedPosts":
-        return cards.filter((item: any) => item.likeStatus === "like");
+        return cards.filter((item: CardType) => item.likeStatus === "like");
       case "dislikedPosts":
-        return cards.filter((item: any) => item.likeStatus === "dislike");
+        return cards.filter((item: CardType) => item.likeStatus === "dislike");
       case "savedPosts":
-        return cards.filter((item: any) => item.saved);
+        return cards.filter((item: CardType) => item.saved);
       case "allPosts":
         return cards;
       default:

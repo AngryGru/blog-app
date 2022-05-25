@@ -6,6 +6,7 @@ import { IoBookmarkOutline, IoEyeOutline } from "react-icons/io5";
 import { setLikePost, setSavedPost } from "../../redux/reducers/postsReducer";
 import { LikeStatus } from "../../common/types";
 import classNames from "classnames";
+import { Card as CardType } from "../../common/types";
 
 type CardProps = {
   id: any;
@@ -14,12 +15,12 @@ type CardProps = {
   text: string;
   date: string;
   onClick?: () => void;
-  likeStatus?: string;
+  likeStatus?: LikeStatus | null;
   saved?: boolean;
 };
 
 const Card: FC<CardProps> = (props) => {
-  const { image, title, text, date, id, likeStatus, saved } = props;
+  const { image, title, text, date, id, likeStatus, saved, onClick } = props;
 
   const dispatch = useDispatch();
 
@@ -51,7 +52,7 @@ const Card: FC<CardProps> = (props) => {
             {date.split("-").reverse().join(".")}
           </p>
           <div className="cardActions">
-            <button className="actions eyeBtn" onClick={props.onClick}>
+            <button className="actions eyeBtn" onClick={onClick}>
               <IoEyeOutline />
             </button>
             <button
@@ -76,7 +77,7 @@ const Card: FC<CardProps> = (props) => {
             </button>
             <button
               className={classNames("actions", {
-                ["activeSave"]: likeStatus === "save",
+                ["activeSave"]: saved,
               })}
               onClick={() => {
                 handleButtonClick(saved ? "unset" : "save");

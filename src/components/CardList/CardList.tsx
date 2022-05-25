@@ -12,9 +12,7 @@ const CardList = ({ data, setModalActive }: any) => {
   const onCardClick = (item: CardType) => {
     const defaultImage =
       "https://st2.depositphotos.com/1031174/12280/i/950/depositphotos_122808092-stock-photo-grey-textured-background.jpg";
-    item.image
-      ? dispatch(setSelectedImage(item.image))
-      : dispatch(setSelectedImage(defaultImage));
+    dispatch(setSelectedImage(item.image ? item.image : defaultImage));
     setModalActive(true);
   };
 
@@ -27,6 +25,8 @@ const CardList = ({ data, setModalActive }: any) => {
         title={item.title}
         text={item.text}
         date={item.date}
+        likeStatus={item.likeStatus}
+        saved={item.saved}
         onClick={() => onCardClick(item)}
       />
     );
