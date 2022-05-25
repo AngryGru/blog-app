@@ -5,8 +5,13 @@ import Card from "../Card";
 import { Link } from "react-router-dom";
 import { Card as CardType } from "../../common/types";
 import { setSelectedImage } from "../../redux/reducers/postsReducer";
+import { Theme, useThemeContext } from "../../context/themeModeContext";
+import classNames from "classnames";
 
 const CardList = ({ data, setModalActive }: any) => {
+  const { theme } = useThemeContext();
+  const isLightTheme = theme === Theme.Light;
+
   const dispatch = useDispatch();
 
   const onCardClick = (item: CardType) => {
@@ -31,7 +36,15 @@ const CardList = ({ data, setModalActive }: any) => {
       />
     );
   });
-  return <div className="list">{listCards}</div>;
+  return (
+    <div
+      className={classNames("list", {
+        ["listDark"]: !isLightTheme,
+      })}
+    >
+      {listCards}
+    </div>
+  );
 };
 
 export default CardList;
