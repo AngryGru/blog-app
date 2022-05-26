@@ -1,12 +1,5 @@
 import React, { useState } from "react";
 import "./App.css";
-// import PageHeader from "./components/PageHeader";
-// import Template from "./pages/Template";
-// import Authorization from "./pages/Authorization";
-// import Confirmation from "./pages/Confirmation";
-// import Posts from "./pages/Posts";
-// import Post from "./pages/Post";
-// import Information from "./pages/Information";
 import Router from "./pages/Router";
 import classNames from "classnames";
 import { ThemeModeProvider } from "./context/ThemeModeProvider";

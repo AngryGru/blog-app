@@ -4,6 +4,7 @@ import Button from "../../components/Button";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import classNames from "classnames";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Confirmation = (props: any) => {
   const { theme } = useThemeContext();

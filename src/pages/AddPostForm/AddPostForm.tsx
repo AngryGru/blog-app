@@ -13,7 +13,11 @@ const AddPostForm = () => {
   };
 
   return (
-    <div className="formContainer">
+    <div
+      className={classNames("formContainer", {
+        ["formContainerDark"]: !isLightTheme,
+      })}
+    >
       <form
         onSubmit={onSubmit}
         className={classNames("addPostForm", {

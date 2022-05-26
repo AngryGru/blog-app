@@ -4,6 +4,8 @@ import Button from "../../../components/Button";
 import { Theme, useThemeContext } from "../../../context/themeModeContext";
 import classNames from "classnames";
 
+import { useSelector } from "react-redux";
+
 type HeaderProps = {
   onClick: (name: string) => void;
   activeTab: string;

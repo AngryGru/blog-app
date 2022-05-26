@@ -1,23 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
 import "./CardList.css";
+import { useDispatch } from "react-redux";
 import Card from "../Card";
 import { Link } from "react-router-dom";
+import { Card as CardType } from "../../common/types";
+import { setSelectedImage } from "../../redux/reducers/postsReducer";
+import { Theme, useThemeContext } from "../../context/themeModeContext";
+import classNames from "classnames";
 
-const CardList = (props: any) => {
-  const listCards = props.data.map((item: any) => {
+const CardList = ({ data, setModalActive }: any) => {
+  const { theme } = useThemeContext();
+  const isLightTheme = theme === Theme.Light;
+
+  const dispatch = useDispatch();
+
+  const onCardClick = (item: CardType) => {
+    const defaultImage =
+      "https://st2.depositphotos.com/1031174/12280/i/950/depositphotos_122808092-stock-photo-grey-textured-background.jpg";
+    dispatch(setSelectedImage(item.image ? item.image : defaultImage));
+    setModalActive(true);
+  };
+
+  const listCards = data.map((item: CardType) => {
     return (
-      <Link key={item.id} to={`/cards-list/${item.id}`}>
+      <Card
+        id={item.id}
+        key={item.id}
+        image={item.image}
+        title={item.title}
+        text={item.text}
+        date={item.date}
+        likeStatus={item.likeStatus}
+        saved={item.saved}
+        onClick={() => onCardClick(item)}
+      />
+    );
+  });
+  return (
+    <div
+      className={classNames("list", {
+        ["listDark"]: !isLightTheme,
+      })}
+    >
+      {listCards}
+    </div>
+  );
+};
+
+export default CardList;
+
+{
+  /* <Link key={item.id} to={`/cards-list/${item.id}`}>
         <Card
           // key={item.id}
           image={item.image}
           title={item.title}
           text={item.text}
           date={item.date}
+          onClick={() => onCardClick(item)}
         />
-      </Link>
-    );
-  });
-  return <div className="list">{listCards}</div>;
-};
-
-export default CardList;
+      </Link> */
+}

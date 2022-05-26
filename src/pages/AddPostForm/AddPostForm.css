@@ -1,8 +1,9 @@
 .formContainer {
   height: 100vh;
+  padding: 10px;
 }
 .addPostForm {
-  margin: 10px auto;
+  margin: 0px auto;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -56,7 +57,9 @@
   font-size: 15px;
   text-align: center;
 }
-
+.formContainerDark {
+  background-color: #202020;
+}
 .addPostFormDark {
   border-color: gold;
   color: white;

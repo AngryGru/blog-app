@@ -9,11 +9,26 @@ import Modal from "../../Modal";
 import { Theme, useThemeContext } from "../../../context/themeModeContext";
 import classNames from "classnames";
 
+import { useDispatch, useSelector } from "react-redux";
+import {
+  registerUser,
+  setLogStatus,
+} from "../../../redux/reducers/authReducer";
+
 export default (props: any) => {
   const { theme, onChangeTheme = () => {} } = useThemeContext();
   const isLightTheme = theme === Theme.Light;
 
   const [modalActive, setModalActive] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const onLogOutBtnClick = () => {
+    dispatch(setLogStatus(false));
+    localStorage.setItem("isLoggedIn", "");
+    window.location.replace("/auth");
+    setModalActive(false);
+  };
 
   return (
     <Menu
@@ -44,7 +59,20 @@ export default (props: any) => {
       <a className="menu-item" href="#" onClick={() => setModalActive(true)}>
         Log out
       </a>
-      <Modal active={modalActive} setActive={setModalActive} />
+      <Modal active={modalActive} setActive={setModalActive}>
+        <p className="modalText">Are you sure you want to log out?</p>
+        <div className="modalActions">
+          <button className="logoutSubmitBtn" onClick={onLogOutBtnClick}>
+            OK
+          </button>
+          <button
+            className="logoutCancelBtn"
+            onClick={() => setModalActive(false)}
+          >
+            Cancel
+          </button>
+        </div>
+      </Modal>
     </Menu>
   );
 };

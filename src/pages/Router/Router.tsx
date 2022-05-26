@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, BrowserRouter, Routes } from "react-router-dom";
+import { Route, BrowserRouter, Routes, Navigate } from "react-router-dom";
 import PageHeader from "../../components/PageHeader";
 import Posts from "../Posts";
 import Post from "../Post";
@@ -8,8 +8,11 @@ import Authorization from "../Authorization";
 import Confirmation from "../Confirmation";
 import AddPostForm from "../AddPostForm";
 
+import { useSelector } from "react-redux";
+import { AuthSelector } from "../../redux/reducers/authReducer";
+
 const Router = () => {
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const isLoggedIn = useSelector(AuthSelector.getLogStatus);
 
   return (
     <BrowserRouter>
@@ -21,11 +24,13 @@ const Router = () => {
             <Route path="info" element={<Information />} />
             <Route path="add-post" element={<AddPostForm />} />
           </Route>
+          <Route path="*" element={<Navigate to={"/"} replace />} />
         </Routes>
       ) : (
         <Routes>
           <Route path={"/auth"} element={<Authorization />}></Route>
           <Route path={"/confirm"} element={<Confirmation />}></Route>
+          <Route path="*" element={<Navigate to={"/auth"} replace />} />
         </Routes>
       )}
     </BrowserRouter>

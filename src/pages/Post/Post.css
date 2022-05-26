@@ -1,6 +1,8 @@
 .postPage {
-  margin-top: 60px;
   height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .postContainer {
   width: 65%;
@@ -37,7 +39,9 @@
   font-weight: bold;
   color: white;
 }
-
+.postPageDark {
+  background-color: #202020;
+}
 .postPageDark .postTitle,
 .postPageDark .postDate {
   color: gold;

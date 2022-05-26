@@ -6,6 +6,8 @@ import { Outlet } from "react-router-dom";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import classNames from "classnames";
 
+import { useDispatch, useSelector } from "react-redux";
+
 const PageHeader = () => {
   const { theme, onChangeTheme = () => {} } = useThemeContext();
   const isLightTheme = theme === Theme.Light;
@@ -34,7 +36,7 @@ const PageHeader = () => {
           </div>
           <div className="themeToggle">
             <label className="switch">
-              <input type="checkbox" onClick={onClickTheme} />
+              <input type="checkbox" onClick={() => onClickTheme()} />
               <span className="slider"></span>
             </label>
           </div>

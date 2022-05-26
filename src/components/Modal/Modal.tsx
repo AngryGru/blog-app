@@ -6,17 +6,13 @@ import { Theme, useThemeContext } from "../../context/themeModeContext";
 type ModalProps = {
   active: boolean;
   setActive: (acitve: boolean) => void;
+  children: any;
 };
 
-const Modal: FC<ModalProps> = ({ active, setActive }) => {
+const Modal: FC<ModalProps> = ({ active, setActive, children }) => {
   const { theme } = useThemeContext();
   const isLightTheme = theme === Theme.Light;
 
-  const onLogOutBtnClick = () => {
-    localStorage.setItem("isLoggedIn", "");
-    window.location.replace("/auth");
-    setActive(false);
-  };
   return (
     <div
       className={active ? "modal active" : "modal"}
@@ -28,15 +24,7 @@ const Modal: FC<ModalProps> = ({ active, setActive }) => {
         })}
         onClick={(e) => e.stopPropagation()}
       >
-        <p className="modalText">Are you sure you want to log out?</p>
-        <div className="modalActions">
-          <button className="logoutSubmitBtn" onClick={onLogOutBtnClick}>
-            OK
-          </button>
-          <button className="logoutCancelBtn" onClick={() => setActive(false)}>
-            Cancel
-          </button>
-        </div>
+        {children}
       </div>
     </div>
   );

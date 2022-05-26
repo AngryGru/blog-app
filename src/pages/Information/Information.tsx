@@ -3,6 +3,12 @@ import "./Information.css";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import classNames from "classnames";
 
+import { useDispatch, useSelector } from "react-redux";
+// import {
+//   setActiveTab,
+//   TabSelector,
+// } from "../../redux/reducers/tabSwitchReducer";
+
 const MOCK_INFO = [
   [
     "Aliquam dapibus urna convallis molestie iaculis. Quisque congue quam auctor libero bibendum, sit amet convallis orci pharetra. Mauris egestas nec ante ac pulvinar. Proin porttitor viverra erat. Sed vestibulum elit a orci facilisis, sed mollis nibh commodo. In ut libero vel nulla blandit faucibus. Proin placerat porttitor nisl.",
@@ -22,23 +28,40 @@ const MOCK_INFO = [
 ];
 
 const Information = () => {
-  const { theme, onChangeTheme = () => {} } = useThemeContext();
+  const { theme } = useThemeContext();
   const isLightTheme = theme === Theme.Light;
-
-  const [activeTab, setActiveTab] = useState("tab_1");
-  const onClickActiveTab = (name: string) => {
-    setActiveTab(name);
-  };
-
-  const isActiveTab_1 = activeTab === "tab_1";
-  const isActiveTab_2 = activeTab === "tab_2";
-  const isActiveTab_3 = activeTab === "tab_3";
 
   const TABS = [
     { tabName: "Tab 1", id: "tab_1", content: MOCK_INFO[0] },
     { tabName: "Tab 2", id: "tab_2", content: MOCK_INFO[1] },
     { tabName: "Tab 3", id: "tab_3", content: MOCK_INFO[2] },
   ];
+
+  const dispatch = useDispatch();
+  const activeTab = useSelector(
+    (state: any) => state.tabSwitchReducer.activeTab
+  );
+
+  // const activeTab = useSelector(TabSelector.getActiveTab);
+
+  const action = (type: string, value: string) => {
+    return {
+      type: type,
+      payload: value,
+    };
+  };
+
+  const onClickActiveTab = (name: string) => {
+    dispatch(
+      name === "tab_1"
+        ? action("activeTab_1", "tab_1")
+        : name === "tab_2"
+        ? action("activeTab_2", "tab_2")
+        : action("activeTab_3", "tab_3")
+    );
+
+    // dispatch(setActiveTab(name));
+  };
 
   return (
     <div
@@ -63,11 +86,11 @@ const Information = () => {
         })}
       </div>
       <div className="informationBody">
-        {isActiveTab_1
-          ? MOCK_INFO[0]
-          : isActiveTab_2
-          ? MOCK_INFO[1]
-          : MOCK_INFO[2]}
+        {activeTab === "tab_1"
+          ? TABS[0].content
+          : activeTab === "tab_2"
+          ? TABS[1].content
+          : TABS[2].content}
       </div>
     </div>
   );

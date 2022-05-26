@@ -3,6 +3,15 @@ import {
   combineReducers,
   compose,
 } from "redux";
+import tabSwitchReducer from "./reducers/tabSwitchReducer";
+import themeSwitchReducer from "./reducers/themeSwitchReducer";
+import postsReducer from "./reducers/postsReducer";
+import authReducer from "./reducers/authReducer";
+
+import { configureStore } from "@reduxjs/toolkit";
+
+import createSagaMiddleware from "redux-saga";
+import rootSaga from "./sagas/rootSaga";
 
 declare global {
   interface Window {
@@ -11,15 +20,19 @@ declare global {
 }
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-function counterReducer(state = { value: 0 }, action: any) {
-  switch (action.type) {
-    case "counter/incremented":
-      return { value: state.value + 1 };
-    case "counter/decremented":
-      return { value: state.value - 1 };
-    default:
-      return state;
-  }
-}
+const sagaMiddleware = createSagaMiddleware();
 
-export const store = createStore(counterReducer);
+const rootReducer = combineReducers({
+  tabSwitchReducer,
+  themeSwitchReducer,
+
+  posts: postsReducer,
+  auth: authReducer,
+});
+
+export const store = configureStore({
+  reducer: rootReducer,
+  middleware: [sagaMiddleware],
+});
+
+sagaMiddleware.run(rootSaga);
