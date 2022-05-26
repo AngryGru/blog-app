@@ -7,6 +7,7 @@ import { setLikePost, setSavedPost } from "../../redux/reducers/postsReducer";
 import { LikeStatus } from "../../common/types";
 import classNames from "classnames";
 import { Card as CardType } from "../../common/types";
+import { useNavigate } from "react-router-dom";
 
 type CardProps = {
   id: any;
@@ -26,7 +27,9 @@ const Card: FC<CardProps> = (props) => {
 
   const handleButtonClick = (action: string) => {
     if (action === "like" || action === "dislike") {
-      dispatch(setLikePost({ id, action }));
+      dispatch(
+        setLikePost({ id, action: likeStatus === action ? null : action })
+      );
     } else if (action === "save" || action === "unset") {
       dispatch(setSavedPost({ id, action }));
     }

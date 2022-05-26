@@ -1,12 +1,14 @@
 import React from "react";
 
 export type Card = {
-  id?: string;
-  image: string;
+  id: string;
+  image?: string;
   title: string;
   text: string;
   date: string;
+  likeStatus?: LikeStatus | null;
   saved?: boolean;
+  onClick?: () => void;
 };
 
 export enum LikeStatus {

@@ -8,8 +8,11 @@ import Authorization from "../Authorization";
 import Confirmation from "../Confirmation";
 import AddPostForm from "../AddPostForm";
 
+import { useSelector } from "react-redux";
+import { AuthSelector } from "../../redux/reducers/authReducer";
+
 const Router = () => {
-  const isLoggedIn = localStorage.getItem("isLoggedIn");
+  const isLoggedIn = useSelector(AuthSelector.getLogStatus);
 
   return (
     <BrowserRouter>

@@ -7,7 +7,11 @@ import { useNavigate } from "react-router-dom";
 import { Theme, useThemeContext } from "../../../context/themeModeContext";
 import classNames from "classnames";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  registerUser,
+  AuthSelector,
+} from "../../../redux/reducers/authReducer";
 
 type RegistrationFormProps = {
   onLoginLinkClick: (name: string) => void;
@@ -102,7 +106,13 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
       setConfirmPasswordDirty(true);
     }
   };
+  const dispatch = useDispatch();
+
   const onSubmit = () => {
+    dispatch(
+      registerUser({ name: username, email: email, password: password })
+    );
+    // localStorage.setItem("isLoggedIn");
     navigate("/confirm", {
       state: {
         email,
@@ -110,10 +120,8 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
     });
   };
 
-  // const { theme } = useThemeContext();
-  // const isLightTheme = theme === Theme.Light;
-  const theme = useSelector((state: any) => state.themeSwitchReducer.theme);
-  const isLightTheme = theme === "lightTheme";
+  const { theme } = useThemeContext();
+  const isLightTheme = theme === Theme.Light;
 
   return (
     <form
