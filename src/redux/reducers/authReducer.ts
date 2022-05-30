@@ -21,6 +21,7 @@ const authSlice = createSlice({
     registerUser: (state: any, action: PayloadAction<RegisterUser>) => {},
     setLogStatus: (state: any, action: PayloadAction<boolean>) => {
       state.isLoggedIn = action.payload;
+      localStorage.setItem("isLoggedIn", state.isLoggedIn);
     },
   },
 });

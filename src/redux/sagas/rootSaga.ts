@@ -1,8 +1,8 @@
 import { all } from "redux-saga/effects";
 import authWatcher from "./authSaga";
-
-function* postWatcher() {}
+import postsWatcher from "./postsSaga";
+// const postsWatcher = () => {};
 
 export default function* rootSaga() {
-  yield all([authWatcher(), postWatcher()]);
+  yield all([authWatcher(), postsWatcher()]);
 }

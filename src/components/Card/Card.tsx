@@ -8,6 +8,9 @@ import { LikeStatus } from "../../common/types";
 import classNames from "classnames";
 import { Card as CardType } from "../../common/types";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
+import { setSelectedImage } from "../../redux/reducers/postsReducer";
 
 type CardProps = {
   id: any;
@@ -15,17 +18,22 @@ type CardProps = {
   title: string;
   text: string;
   date: string;
-  onClick?: () => void;
+  onClick?: (event: any) => void;
   likeStatus?: LikeStatus | null;
   saved?: boolean;
+  setModalActive: (isModalActive: boolean) => void;
 };
 
 const Card: FC<CardProps> = (props) => {
   const { image, title, text, date, id, likeStatus, saved, onClick } = props;
 
+  const defaultImage =
+    "https://st2.depositphotos.com/1031174/12280/i/950/depositphotos_122808092-stock-photo-grey-textured-background.jpg";
+
   const dispatch = useDispatch();
 
-  const handleButtonClick = (action: string) => {
+  const handleButtonClick = (event: any, action: string) => {
+    event.stopPropagation();
     if (action === "like" || action === "dislike") {
       dispatch(
         setLikePost({ id, action: likeStatus === action ? null : action })
@@ -55,35 +63,38 @@ const Card: FC<CardProps> = (props) => {
             {date.split("-").reverse().join(".")}
           </p>
           <div className="cardActions">
-            <button className="actions eyeBtn" onClick={onClick}>
+            <button id="eyeBtn" className="actions eyeBtn" onClick={onClick}>
               <IoEyeOutline />
             </button>
             <button
+              id="likeBtn"
               className={classNames("actions", {
                 ["activeLike"]: likeStatus === LikeStatus.Like,
               })}
-              onClick={() => {
-                handleButtonClick(LikeStatus.Like);
+              onClick={(event) => {
+                handleButtonClick(event, LikeStatus.Like);
               }}
             >
               <AiOutlineLike />
             </button>
             <button
+              id="dislikeBtn"
               className={classNames("actions", {
                 ["activeDislike"]: likeStatus === LikeStatus.Dislike,
               })}
-              onClick={() => {
-                handleButtonClick(LikeStatus.Dislike);
+              onClick={(event) => {
+                handleButtonClick(event, LikeStatus.Dislike);
               }}
             >
               <AiOutlineDislike />
             </button>
             <button
+              id="saveBtn"
               className={classNames("actions", {
                 ["activeSave"]: saved,
               })}
-              onClick={() => {
-                handleButtonClick(saved ? "unset" : "save");
+              onClick={(event) => {
+                handleButtonClick(event, saved ? "unset" : "save");
               }}
             >
               <IoBookmarkOutline />

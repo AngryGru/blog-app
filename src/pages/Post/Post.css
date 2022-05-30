@@ -5,6 +5,7 @@
   justify-content: center;
 }
 .postContainer {
+  max-height: 80%;
   width: 65%;
   margin: 0 auto;
   display: flex;
@@ -23,11 +24,16 @@
 }
 .postContent {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
 }
-.postImg {
+.postImage {
   width: 40%;
+}
+.postImage img {
+  width: 100%;
   height: auto;
+  max-height: 250px;
 }
 .postText {
   width: 60%;
