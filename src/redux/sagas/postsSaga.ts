@@ -1,6 +1,5 @@
 import { all, takeLatest, put, call } from "redux-saga/effects";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { Card as CardType } from "../../common/types";
 import {
   loadData,
   setPosts,

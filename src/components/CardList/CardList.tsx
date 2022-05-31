@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import "./CardList.css";
 import { useDispatch } from "react-redux";
 import Card from "../Card";
-import { Link } from "react-router-dom";
-import { Card as CardType } from "../../common/types";
+import { CardType } from "../../common/types";
 import { setSelectedImage } from "../../redux/reducers/postsReducer";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import classNames from "classnames";
@@ -39,7 +38,6 @@ const CardList = ({ data, setModalActive }: any) => {
           date={item.date}
           likeStatus={item.likeStatus}
           saved={item.saved}
-          setModalActive={setModalActive}
           onClick={(event) => onEyeBtnClick(event, item)}
         />
       </div>

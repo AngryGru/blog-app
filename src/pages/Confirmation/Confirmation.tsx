@@ -3,15 +3,13 @@ import "./Confirmation.css";
 import Button from "../../components/Button";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import classNames from "classnames";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 
 const Confirmation = (props: any) => {
   const { theme } = useThemeContext();
   const isLightTheme = theme === Theme.Light;
 
   const location: any = useLocation();
-  // const navigate = useNavigate()
 
   const onHomeClick = () => {
     localStorage.setItem("isLoggedIn", "true");

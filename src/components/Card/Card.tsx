@@ -1,16 +1,11 @@
-import React, { FC, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { FC } from "react";
+import { useDispatch } from "react-redux";
 import "./Card.css";
 import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
 import { IoBookmarkOutline, IoEyeOutline } from "react-icons/io5";
 import { setLikePost, setSavedPost } from "../../redux/reducers/postsReducer";
 import { LikeStatus } from "../../common/types";
 import classNames from "classnames";
-import { Card as CardType } from "../../common/types";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
-
-import { setSelectedImage } from "../../redux/reducers/postsReducer";
 
 type CardProps = {
   id: any;
@@ -21,7 +16,6 @@ type CardProps = {
   onClick?: (event: any) => void;
   likeStatus?: LikeStatus | null;
   saved?: boolean;
-  setModalActive: (isModalActive: boolean) => void;
 };
 
 const Card: FC<CardProps> = (props) => {

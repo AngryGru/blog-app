@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import "./Modal.css";
 import classNames from "classnames";
 import { Theme, useThemeContext } from "../../context/themeModeContext";

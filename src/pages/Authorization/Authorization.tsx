@@ -3,9 +3,8 @@ import "./Authorization.css";
 import Header from "./Header";
 import LoginForm from "./LoginForm";
 import RegistrationForm from "./RegistrationForm";
-import Confirmation from "../Confirmation";
 
-const Authorization = (props: any) => {
+const Authorization = () => {
   const [tabName, setTabName] = useState("login");
 
   const onHeaderButtonClick = (name: string) => {
