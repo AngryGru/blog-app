@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import "./PageHeader.css";
 import Sidebar from "./Sidebar";
 import { FaRegUser } from "react-icons/fa";
 import { Outlet } from "react-router-dom";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import classNames from "classnames";
-
-import { useDispatch, useSelector } from "react-redux";
 
 const PageHeader = () => {
   const { theme, onChangeTheme = () => {} } = useThemeContext();

@@ -3,15 +3,10 @@ import "./RegistrationForm.css";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
-
 import { Theme, useThemeContext } from "../../../context/themeModeContext";
 import classNames from "classnames";
-
-import { useDispatch, useSelector } from "react-redux";
-import {
-  registerUser,
-  AuthSelector,
-} from "../../../redux/reducers/authReducer";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../../../redux/reducers/authReducer";
 
 type RegistrationFormProps = {
   onLoginLinkClick: (name: string) => void;
@@ -112,7 +107,7 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
     dispatch(
       registerUser({ name: username, email: email, password: password })
     );
-    // localStorage.setItem("isLoggedIn");
+
     navigate("/confirm", {
       state: {
         email,

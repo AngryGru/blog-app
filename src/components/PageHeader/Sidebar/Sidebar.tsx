@@ -5,18 +5,13 @@ import { FiMenu } from "react-icons/fi";
 import { IoClose } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
 import Modal from "../../Modal";
-
 import { Theme, useThemeContext } from "../../../context/themeModeContext";
 import classNames from "classnames";
-
-import { useDispatch, useSelector } from "react-redux";
-import {
-  registerUser,
-  setLogStatus,
-} from "../../../redux/reducers/authReducer";
+import { useDispatch } from "react-redux";
+import { setLogStatus } from "../../../redux/reducers/authReducer";
 
 export default (props: any) => {
-  const { theme, onChangeTheme = () => {} } = useThemeContext();
+  const { theme } = useThemeContext();
   const isLightTheme = theme === Theme.Light;
 
   const [modalActive, setModalActive] = useState(false);

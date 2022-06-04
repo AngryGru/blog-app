@@ -1,97 +1,46 @@
-import React, { useEffect, useState } from "react";
-import { IoClose } from "react-icons/io5";
 import "./Posts.css";
-import { useDispatch } from "react-redux";
-import { loadData } from "../../redux/reducers/postsReducer";
-import Card from "../../components/Card";
-import CardList from "../../components/CardList";
-import { Theme, useThemeContext } from "../../context/themeModeContext";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
-import { useSelector } from "react-redux";
-import { PostsSelectors } from "../../redux/reducers/postsReducer";
+import Lottie from "react-lottie";
+import animationData from "../../components/Lotties/lottie-loading.json";
+import { Theme, useThemeContext } from "../../context/themeModeContext";
 import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
-import { IoBookmarkOutline } from "react-icons/io5";
+import { IoBookmarkOutline, IoClose } from "react-icons/io5";
 import Modal from "../../components/Modal";
+import CardList from "../../components/CardList";
 import {
+  PostsSelectors,
   setSelectedImage,
   setPostsTab,
+  loadData,
 } from "../../redux/reducers/postsReducer";
 
-const LIST_DATA = [
-  {
-    id: 0,
-    image:
-      "https://images.hdqwalls.com/download/triangles-colorful-background-nz-1920x1080.jpg",
-    text: "Lorem ipsum dolor sit amet consectetur.",
-    date: "2022-04-16",
-    lesson_num: 0,
-    title: "What is Lorem Ipsum?",
-    author: 0,
-  },
-  {
-    id: 1,
-    image:
-      "https://cdn.pixabay.com/photo/2016/06/02/02/33/triangles-1430105__480.png",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, eligendi.",
-    date: "2022-03-10",
-    lesson_num: 1,
-    title: "What is Lorem?",
-    author: 1,
-  },
-  {
-    id: 2,
-    text: "Dolorum, eligendi. Lorem consectetur adipisicing elit.",
-    date: "2022-06-18",
-    lesson_num: 2,
-    title: "What is Ipsum?",
-    author: 2,
-  },
-  {
-    id: 3,
-    image:
-      "https://images.hdqwalls.com/download/colorful-polygons-1920x1080.jpg",
-    text: "Sit amet consectetur lorem ipsum dolor adipisicing elit. Eligendi, dolorum.",
-    date: "2022-05-08",
-    lesson_num: 3,
-    title: "What is Dolorum?",
-    author: 3,
-  },
-  {
-    id: 4,
-    image:
-      "https://www.teahub.io/photos/full/128-1284836_desktop-wallpaper-laptop-mac-macbook-air-vk42-rainbow.jpg",
-    text: "Sit amet consectetur lorem ipsum dolor adipisicing elit. Eligendi, dolorum.",
-    date: "2022-05-09",
-    lesson_num: 4,
-    title: "Avocado runs the world!",
-    author: 4,
-  },
-  {
-    id: 5,
-    image:
-      "https://stackify.com/wp-content/uploads/2017/11/OOPS-concept-abstraction-881x441.jpg",
-    text: "Sit amet consectetur lorem ipsum dolor adipisicing elit. Eligendi, dolorum.  Sit amet consectetur lorem ipsum dolor adipisicing elit. Sit amet consectetur lorem ipsum dolor adipisicing elit. Eligendi, dolorum.",
-    date: "2022-05-07",
-    lesson_num: 5,
-    title: "The Voyager's Courage",
-    author: 5,
-  },
-];
-
 const Posts = () => {
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
   const dispatch = useDispatch();
 
   const activeTab = useSelector(PostsSelectors.getPostsTab);
+
   const cardsList = useSelector((state) =>
     PostsSelectors.getCards(state, activeTab)
   );
+  const allPostsLoading = useSelector(PostsSelectors.getAllPostsLoading);
 
   const onTabClick = (tab: string) => {
     dispatch(setPostsTab(tab));
   };
 
   useEffect(() => {
-    dispatch(loadData(LIST_DATA));
+    dispatch(loadData(true));
   }, []);
 
   const { theme } = useThemeContext();
@@ -101,10 +50,10 @@ const Posts = () => {
     window.location.replace("/add-post");
   };
 
-  const selectedCard = useSelector(PostsSelectors.getSelectedPost);
   const selectedImage = useSelector(PostsSelectors.getSelectedImage);
 
   const [modalActive, setModalActive] = useState(false);
+
   const onCloseModalClick = () => {
     setModalActive(false);
     dispatch(setSelectedImage(null));
@@ -168,8 +117,12 @@ const Posts = () => {
           {selectedImage && <img src={selectedImage} alt="Selected image" />}
         </div>
       </Modal>
-      <CardList data={cardsList} setModalActive={setModalActive} />
-      {/* <CardList data={LIST_DATA} /> */}
+
+      {allPostsLoading ? (
+        <Lottie options={defaultOptions} height={400} width={400} />
+      ) : (
+        <CardList data={cardsList} setModalActive={setModalActive} />
+      )}
     </div>
   );
 };

@@ -4,7 +4,6 @@ import {
   compose,
 } from "redux";
 import tabSwitchReducer from "./reducers/tabSwitchReducer";
-import themeSwitchReducer from "./reducers/themeSwitchReducer";
 import postsReducer from "./reducers/postsReducer";
 import authReducer from "./reducers/authReducer";
 
@@ -24,8 +23,6 @@ const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
   tabSwitchReducer,
-  themeSwitchReducer,
-
   posts: postsReducer,
   auth: authReducer,
 });

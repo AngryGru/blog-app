@@ -1,12 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Card as CardType } from "../../common/types";
-import Card from "../../components/Card";
+import { CardType } from "../../common/types";
 
-type PostState = {
+export type PostState = {
   selectedPost: CardType | null;
   selectedImage: string;
   cardsList: CardType[];
   postsTab: string;
+
+  isAllPostsLoading: boolean;
+  isSinglePostLoading: boolean;
 };
 
 const initialState: PostState = {
@@ -14,19 +16,18 @@ const initialState: PostState = {
   selectedImage: "",
   cardsList: [],
   postsTab: "allPosts",
+  isAllPostsLoading: false,
+  isSinglePostLoading: false,
 };
 
 const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    setSelectedPost: (state, action) => {
-      state.selectedPost = action.payload;
-    },
     setSelectedImage: (state, action) => {
       state.selectedImage = action.payload;
     },
-    loadData: (state, action) => {
+    setPosts: (state, action) => {
       state.cardsList = action.payload.map((card: CardType) => {
         return {
           ...card,
@@ -35,6 +36,12 @@ const postsSlice = createSlice({
         };
       });
     },
+    loadData: (state, action) => {},
+    setPost: (state, action: PayloadAction<CardType>) => {
+      state.selectedPost = action.payload;
+    },
+    loadPost: (state, action) => {},
+
     setLikePost: (state: any, action) => {
       const card = state.cardsList.find((c: any) => c.id === action.payload.id);
       if (card) {
@@ -50,16 +57,26 @@ const postsSlice = createSlice({
     setPostsTab: (state, action) => {
       state.postsTab = action.payload;
     },
+    setAllPostsLoading: (state, action) => {
+      state.isAllPostsLoading = action.payload;
+    },
+    setSinglePostLoading: (state, action) => {
+      state.isSinglePostLoading = action.payload;
+    },
   },
 });
 
 export const {
-  setSelectedPost,
   setSelectedImage,
+  setPosts,
   loadData,
+  setPost,
+  loadPost,
   setLikePost,
   setSavedPost,
   setPostsTab,
+  setAllPostsLoading,
+  setSinglePostLoading,
 } = postsSlice.actions;
 
 export default postsSlice.reducer;
@@ -83,4 +100,6 @@ export const PostsSelectors = {
         return cards;
     }
   },
+  getAllPostsLoading: (state: any) => state.posts.isAllPostsLoading,
+  getSinglePostLoading: (state: any) => state.posts.isSinglePostLoading,
 };

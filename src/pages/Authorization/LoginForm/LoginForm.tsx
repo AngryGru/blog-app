@@ -4,7 +4,6 @@ import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 import { Theme, useThemeContext } from "../../../context/themeModeContext";
 import classNames from "classnames";
-import { useSelector } from "react-redux";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
