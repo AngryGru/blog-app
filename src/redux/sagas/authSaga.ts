@@ -8,7 +8,7 @@ import {
   activateUser,
   loginUser,
   setLogStatus,
-  setLoading,
+  setAuthLoading,
   setUserName,
   getUserInfo,
 } from "../reducers/authReducer";
@@ -37,16 +37,14 @@ function* registerUserSaga(action: PayloadAction<RegisterUser>) {
 
 function* userActivateSaga(action: any) {
   const { uuid, token, callback } = action.payload;
-
   const { status } = yield call(activateUserApi, uuid, token);
-
   if (status === 204) {
     callback();
   }
 }
 
 function* loginUserSaga(action: any) {
-  yield put(setLoading(true));
+  yield put(setAuthLoading(true));
   const userData = action.payload;
 
   const { status, data, problem } = yield call(loginUserApi, userData);
@@ -58,7 +56,7 @@ function* loginUserSaga(action: any) {
   } else {
     console.error("Error login: ", problem);
   }
-  yield put(setLoading(false));
+  yield put(setAuthLoading(false));
 }
 
 function* getUserInfoSaga() {

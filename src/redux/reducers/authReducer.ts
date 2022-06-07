@@ -10,7 +10,7 @@ export type RegisterUser = {
 type AuthReducerStateType = {
   isLoggedIn: boolean;
   tempMail: string;
-  isLoading: boolean;
+  isAuthLoading: boolean;
   userName: string;
 };
 
@@ -19,7 +19,7 @@ const initialState: AuthReducerStateType = {
     !!localStorage.getItem("jwtAccessToken") ||
     !!localStorage.getItem("jwtRefreshToken"),
   tempMail: "",
-  isLoading: false,
+  isAuthLoading: false,
   userName: "",
 };
 
@@ -39,8 +39,8 @@ const authSlice = createSlice({
     setTempMail: (state: any, action: PayloadAction<string>) => {
       state.tempMail = action.payload;
     },
-    setLoading: (state, action) => {
-      state.isLoading = action.payload;
+    setAuthLoading: (state, action) => {
+      state.isAuthLoading = action.payload;
     },
     getUserInfo: (state, action: any) => {},
     setUserName: (state, action: PayloadAction<string>) => {
@@ -55,7 +55,7 @@ export const {
   setTempMail,
   activateUser,
   loginUser,
-  setLoading,
+  setAuthLoading,
   setUserName,
   getUserInfo,
 } = authSlice.actions;
@@ -65,6 +65,6 @@ export default authSlice.reducer;
 export const AuthSelector = {
   getLogStatus: (state: any) => state.auth.isLoggedIn,
   getTempMail: (state: any) => state.auth.tempMail,
-  getLoading: (state: any) => state.auth.isLoading,
+  getAuthLoading: (state: any) => state.auth.isAuthLoading,
   getUserName: (state: any) => state.auth.userName,
 };
