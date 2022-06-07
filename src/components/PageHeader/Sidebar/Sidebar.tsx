@@ -19,9 +19,9 @@ export default (props: any) => {
   const dispatch = useDispatch();
 
   const onLogOutBtnClick = () => {
+    localStorage.setItem("jwtAccessToken", "");
+    localStorage.setItem("jwtRefreshToken", "");
     dispatch(setLogStatus(false));
-    localStorage.setItem("isLoggedIn", "");
-    window.location.replace("/auth");
     setModalActive(false);
   };
 

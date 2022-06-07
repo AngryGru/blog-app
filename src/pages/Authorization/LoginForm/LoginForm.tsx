@@ -4,6 +4,8 @@ import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 import { Theme, useThemeContext } from "../../../context/themeModeContext";
 import classNames from "classnames";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../../redux/reducers/authReducer";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -56,8 +58,11 @@ const LoginForm = () => {
     }
   };
 
+  const dispatch = useDispatch();
+
   const onSubmitLoginForm = (e: any) => {
     e.preventDefault();
+    dispatch(loginUser({ email, password }));
   };
 
   const { theme } = useThemeContext();

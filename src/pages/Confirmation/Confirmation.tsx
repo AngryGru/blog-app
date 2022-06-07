@@ -3,17 +3,31 @@ import "./Confirmation.css";
 import Button from "../../components/Button";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import classNames from "classnames";
-import { useLocation } from "react-router-dom";
+
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { AuthSelector, activateUser } from "../../redux/reducers/authReducer";
 
 const Confirmation = (props: any) => {
   const { theme } = useThemeContext();
   const isLightTheme = theme === Theme.Light;
 
-  const location: any = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const tempMail = useSelector(AuthSelector.getTempMail);
+  const { uuid, token } = useParams();
 
   const onHomeClick = () => {
-    localStorage.setItem("isLoggedIn", "true");
-    window.location.replace("/cards-list");
+    dispatch(
+      activateUser({
+        uuid,
+        token,
+        callback: () => {
+          navigate("/auth");
+        },
+      })
+    );
   };
 
   return (
@@ -28,16 +42,13 @@ const Confirmation = (props: any) => {
           <p>Please activate your account with</p>
           <p>
             the activation link in the email{" "}
-            <Button
-              className={"btnLink"}
-              value={location?.state?.email ?? ""}
-            />
+            <Button className={"btnLink"} value={tempMail || ""} />
           </p>
           <p>Please check your email</p>
         </div>
         <Button
           className={"btn confirmBtn"}
-          value={"Home"}
+          value={"Confirm"}
           onClick={onHomeClick}
         />
       </div>

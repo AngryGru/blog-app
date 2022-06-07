@@ -5,6 +5,8 @@ import { FaRegUser } from "react-icons/fa";
 import { Outlet } from "react-router-dom";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
 import classNames from "classnames";
+import { useSelector } from "react-redux";
+import { AuthSelector } from "../../redux/reducers/authReducer";
 
 const PageHeader = () => {
   const { theme, onChangeTheme = () => {} } = useThemeContext();
@@ -15,6 +17,8 @@ const PageHeader = () => {
       ? onChangeTheme(Theme.Dark)
       : onChangeTheme(Theme.Light);
   };
+
+  const userName = useSelector(AuthSelector.getUserName);
 
   return (
     <div>
@@ -30,7 +34,7 @@ const PageHeader = () => {
         />
         <div id="page-wrap">
           <div>
-            <FaRegUser /> Username
+            <FaRegUser /> {userName}
           </div>
           <div className="themeToggle">
             <label className="switch">
