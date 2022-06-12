@@ -26,7 +26,8 @@ const Router = () => {
       {isLoggedIn ? (
         <Routes>
           <Route path={"/"} element={<PageHeader />}>
-            <Route path="cards-list" element={<Posts />} />
+            <Route path="cards-list" element={<Posts isPersonal={false} />} />
+            <Route path="my-posts" element={<Posts isPersonal />} />
             <Route path="cards-list/:id" element={<Post />} />
             <Route path="info" element={<Information />} />
             <Route path="add-post" element={<AddPostForm />} />

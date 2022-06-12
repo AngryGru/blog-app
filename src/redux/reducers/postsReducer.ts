@@ -5,6 +5,7 @@ export type PostState = {
   selectedPost: CardType | null;
   selectedImage: string;
   cardsList: CardType[];
+  myCardsList: CardType[];
   postsTab: string;
 
   isAllPostsLoading: boolean;
@@ -15,6 +16,7 @@ const initialState: PostState = {
   selectedPost: null,
   selectedImage: "",
   cardsList: [],
+  myCardsList: [],
   postsTab: "allPosts",
   isAllPostsLoading: false,
   isSinglePostLoading: false,
@@ -24,10 +26,7 @@ const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    setSelectedImage: (state, action) => {
-      state.selectedImage = action.payload;
-    },
-    setPosts: (state, action) => {
+    setAllPosts: (state, action) => {
       state.cardsList = action.payload.map((card: CardType) => {
         return {
           ...card,
@@ -36,12 +35,24 @@ const postsSlice = createSlice({
         };
       });
     },
-    loadData: (state, action) => {},
-    setPost: (state, action: PayloadAction<CardType>) => {
+    loadAllPosts: (state, action) => {},
+    setSelectedImage: (state, action) => {
+      state.selectedImage = action.payload;
+    },
+    setSelectedPost: (state, action: PayloadAction<CardType>) => {
       state.selectedPost = action.payload;
     },
     loadPost: (state, action) => {},
-
+    setMyPosts: (state, action) => {
+      state.myCardsList = action.payload.map((card: CardType) => {
+        return {
+          ...card,
+          likeStatus: null,
+          saved: false,
+        };
+      });
+    },
+    loadMyPosts: (state, action) => {},
     setLikePost: (state: any, action) => {
       const card = state.cardsList.find((c: any) => c.id === action.payload.id);
       if (card) {
@@ -68,15 +79,17 @@ const postsSlice = createSlice({
 
 export const {
   setSelectedImage,
-  setPosts,
-  loadData,
-  setPost,
+  setAllPosts,
+  loadAllPosts,
+  setSelectedPost,
   loadPost,
   setLikePost,
   setSavedPost,
   setPostsTab,
   setAllPostsLoading,
   setSinglePostLoading,
+  loadMyPosts,
+  setMyPosts,
 } = postsSlice.actions;
 
 export default postsSlice.reducer;
@@ -85,8 +98,8 @@ export const PostsSelectors = {
   getSelectedPost: (state: any) => state.posts.selectedPost,
   getSelectedImage: (state: any) => state.posts.selectedImage,
   getPostsTab: (state: any) => state.posts.postsTab,
-  getCards: (state: any, filter: any) => {
-    const cards = state.posts.cardsList;
+  getCards: (state: any, filter: any, isPersonal: boolean) => {
+    const cards = isPersonal ? state.posts.myCardsList : state.posts.cardsList;
     switch (filter) {
       case "likedPosts":
         return cards.filter((item: CardType) => item.likeStatus === "like");

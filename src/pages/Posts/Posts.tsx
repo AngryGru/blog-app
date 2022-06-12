@@ -13,10 +13,12 @@ import {
   PostsSelectors,
   setSelectedImage,
   setPostsTab,
-  loadData,
+  loadAllPosts,
+  loadMyPosts,
 } from "../../redux/reducers/postsReducer";
+import EmptyState from "../../components/EmptyState";
 
-const Posts = () => {
+const Posts = ({ isPersonal }: any) => {
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -31,7 +33,7 @@ const Posts = () => {
   const activeTab = useSelector(PostsSelectors.getPostsTab);
 
   const cardsList = useSelector((state) =>
-    PostsSelectors.getCards(state, activeTab)
+    PostsSelectors.getCards(state, activeTab, isPersonal)
   );
   const allPostsLoading = useSelector(PostsSelectors.getAllPostsLoading);
 
@@ -40,7 +42,7 @@ const Posts = () => {
   };
 
   useEffect(() => {
-    dispatch(loadData(true));
+    dispatch(isPersonal ? loadMyPosts("") : loadAllPosts(""));
   }, []);
 
   const { theme } = useThemeContext();
@@ -82,11 +84,10 @@ const Posts = () => {
     <div
       className={classNames("postsPage", {
         ["postsPageDark"]: !isLightTheme,
-      })}
-    >
+      })}>
       <div className="postsHeader">
         <div className="postsHeaderTitle">
-          <p>My posts</p>
+          <p>{isPersonal ? "My posts" : "All posts"}</p>
           <button className="addBtn" onClick={onAddBtnClick}>
             Add
           </button>
@@ -99,8 +100,7 @@ const Posts = () => {
                 className={classNames(`tab ${tab.className}`, {
                   ["activeTab"]: tab.id === activeTab,
                 })}
-                onClick={() => onTabClick(`${tab.id}`)}
-              >
+                onClick={() => onTabClick(`${tab.id}`)}>
                 {tab.tabName}
               </button>
             );
@@ -120,8 +120,10 @@ const Posts = () => {
 
       {allPostsLoading ? (
         <Lottie options={defaultOptions} height={400} width={400} />
-      ) : (
+      ) : cardsList.length > 0 ? (
         <CardList data={cardsList} setModalActive={setModalActive} />
+      ) : (
+        <EmptyState />
       )}
     </div>
   );
