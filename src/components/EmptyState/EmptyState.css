@@ -1,0 +1,15 @@
+.emptyStateContainer {
+  margin: 60px auto;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.emptyStateTitle {
+  font-size: 30px;
+  color: lightblue;
+}
+.emptyStateContainerDark .emptyStateTitle {
+  color: lightgoldenrodyellow;
+}
