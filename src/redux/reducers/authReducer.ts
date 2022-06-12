@@ -36,6 +36,7 @@ const authSlice = createSlice({
     setLogStatus: (state: any, action: PayloadAction<boolean>) => {
       state.isLoggedIn = action.payload;
     },
+    setLogOut: (state, action: any) => {},
     setTempMail: (state: any, action: PayloadAction<string>) => {
       state.tempMail = action.payload;
     },
@@ -58,6 +59,7 @@ export const {
   setAuthLoading,
   setUserName,
   getUserInfo,
+  setLogOut,
 } = authSlice.actions;
 
 export default authSlice.reducer;
