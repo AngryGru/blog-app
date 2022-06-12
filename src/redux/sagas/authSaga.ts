@@ -61,15 +61,13 @@ function* loginUserSaga(action: any) {
   yield put(setAuthLoading(false));
 }
 
-// function* getUserInfoSaga() {
-//   const { status, data } = yield callCheckingAuth(getUserInfoApi);
-
-//   console.log(data);
-
-//   if (status === 200) {
-//     yield put(setUserName(data.username));
-//   }
-// }
+function* getUserInfoSaga() {
+  const { status, data } = yield callCheckingAuth(getUserInfoApi);
+  console.log(data);
+  if (status === 200) {
+    yield put(setUserName(data.username));
+  }
+}
 
 export function* logOutSaga() {
   localStorage.removeItem("jwtAccessToken");
@@ -82,7 +80,7 @@ export default function* authWatcher() {
     takeLatest(registerUser, registerUserSaga),
     takeLatest(activateUser, userActivateSaga),
     takeLatest(loginUser, loginUserSaga),
-    // takeLatest(getUserInfo, getUserInfoSaga),
+    takeLatest(getUserInfo, getUserInfoSaga),
     takeLatest(setLogOut, logOutSaga),
   ]);
 }
