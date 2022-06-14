@@ -143,3 +143,74 @@
   color: darkorange;
   font-size: 30px;
 }
+
+/* PAGINATION STYLES */
+.paginationContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.searchContainer {
+  width: 25%;
+}
+.searchInp {
+  width: 100%;
+}
+.pagination {
+  width: 40%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+.limitInp {
+  width: 45%;
+}
+.paginationActions {
+  width: 45%;
+  border: 1px solid gray;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.prevBtn,
+.nextBtn {
+  width: 20%;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  color: #1f51ff;
+}
+.prevBtn {
+  border-radius: 10px 0px 0px 10px;
+  border-right: 1px solid gray;
+}
+.nextBtn {
+  border-radius: 0px 10px 10px 0px;
+  border-left: 1px solid gray;
+}
+.pageNum {
+  color: #1f51ff;
+}
+.inactive {
+  color: gray;
+}
+
+.selectContainer {
+  width: 15%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+.select {
+  width: 100%;
+  height: 30px;
+  border: 2px solid #1f51ff;
+  border-radius: 20px;
+  outline: none;
+}

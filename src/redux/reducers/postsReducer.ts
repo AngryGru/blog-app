@@ -10,6 +10,7 @@ export type PostState = {
 
   isAllPostsLoading: boolean;
   isSinglePostLoading: boolean;
+  totalAllPostsCount: number;
 };
 
 const initialState: PostState = {
@@ -20,6 +21,7 @@ const initialState: PostState = {
   postsTab: "allPosts",
   isAllPostsLoading: false,
   isSinglePostLoading: false,
+  totalAllPostsCount: 0,
 };
 
 const postsSlice = createSlice({
@@ -35,7 +37,7 @@ const postsSlice = createSlice({
         };
       });
     },
-    loadAllPosts: (state, action) => {},
+    loadAllPosts: (state, action: any) => {},
     setSelectedImage: (state, action) => {
       state.selectedImage = action.payload;
     },
@@ -52,7 +54,7 @@ const postsSlice = createSlice({
         };
       });
     },
-    loadMyPosts: (state, action) => {},
+    loadMyPosts: (state, action: any) => {},
     setLikePost: (state: any, action) => {
       const card = state.cardsList.find((c: any) => c.id === action.payload.id);
       if (card) {
@@ -74,6 +76,9 @@ const postsSlice = createSlice({
     setSinglePostLoading: (state, action) => {
       state.isSinglePostLoading = action.payload;
     },
+    setTotalAllPostsCount: (state, action) => {
+      state.totalAllPostsCount = action.payload;
+    },
   },
 });
 
@@ -90,6 +95,7 @@ export const {
   setSinglePostLoading,
   loadMyPosts,
   setMyPosts,
+  setTotalAllPostsCount,
 } = postsSlice.actions;
 
 export default postsSlice.reducer;
@@ -115,4 +121,5 @@ export const PostsSelectors = {
   },
   getAllPostsLoading: (state: any) => state.posts.isAllPostsLoading,
   getSinglePostLoading: (state: any) => state.posts.isSinglePostLoading,
+  getTotalAllPostsCount: (state: any) => state.posts.totalAllPostsCount,
 };

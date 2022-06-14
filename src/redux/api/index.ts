@@ -10,8 +10,8 @@ const API = create({
   baseURL: "https://studapi.teachmeskills.by/",
 });
 
-const getPosts = () => {
-  return API.get("/blog/posts/");
+const getPosts = ({ search = "", limit = 2, offset = 0, order = "date" }) => {
+  return API.get("/blog/posts/", { search, limit, offset, order });
 };
 
 const getSinglePost = (id: string) => {
