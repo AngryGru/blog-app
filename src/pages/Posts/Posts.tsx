@@ -5,12 +5,7 @@ import classNames from "classnames";
 import Lottie from "react-lottie";
 import animationData from "../../components/Lotties/lottie-loading.json";
 import { Theme, useThemeContext } from "../../context/themeModeContext";
-import {
-  AiOutlineLike,
-  AiOutlineDislike,
-  AiFillCaretLeft,
-  AiFillCaretRight,
-} from "react-icons/ai";
+import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
 import { IoBookmarkOutline, IoClose } from "react-icons/io5";
 import Modal from "../../components/Modal";
 import CardList from "../../components/CardList";
@@ -18,12 +13,13 @@ import {
   PostsSelectors,
   setSelectedImage,
   setPostsTab,
+  setPostsLimitTab,
   loadAllPosts,
   loadMyPosts,
 } from "../../redux/reducers/postsReducer";
 import EmptyState from "../../components/EmptyState";
 import Input from "../../components/Input";
-import { spawn } from "child_process";
+import Pagination from "../../components/Pagination";
 
 const Posts = ({ isPersonal }: any) => {
   const defaultOptions = {
@@ -38,6 +34,7 @@ const Posts = ({ isPersonal }: any) => {
   const dispatch = useDispatch();
 
   const activeTab = useSelector(PostsSelectors.getPostsTab);
+  const activeLimitTab = useSelector(PostsSelectors.getPostsLimitTab);
 
   const cardsList = useSelector((state) =>
     PostsSelectors.getCards(state, activeTab, isPersonal)
@@ -51,12 +48,12 @@ const Posts = ({ isPersonal }: any) => {
   const totalCount = useSelector(PostsSelectors.getTotalAllPostsCount);
   const [search, setSearch] = useState("");
   const [limit, setLimit] = useState(2);
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [order, setOrder] = useState("date");
   const pagesCount = Math.ceil(totalCount / limit);
 
   useEffect(() => {
-    const offset = page * limit;
+    const offset = (page - 1) * limit;
     dispatch(
       isPersonal
         ? loadMyPosts("")
@@ -69,8 +66,9 @@ const Posts = ({ isPersonal }: any) => {
     setPage(1);
   };
 
-  const onLimitChange = (event: any) => {
-    setLimit(event.target.value);
+  const onLimitChange = (value: number) => {
+    dispatch(setPostsLimitTab(value));
+    setLimit(value);
     setPage(1);
   };
 
@@ -120,11 +118,35 @@ const Posts = ({ isPersonal }: any) => {
     { tabName: <IoBookmarkOutline />, id: "savedPosts", className: "saveTab" },
   ];
 
+  const POSTS_LIMIT_TABS = [
+    {
+      tabName: "2",
+      id: 2,
+      value: 2,
+    },
+    {
+      tabName: "5",
+      id: 5,
+      value: 5,
+    },
+    {
+      tabName: "10",
+      id: 10,
+      value: 10,
+    },
+    {
+      tabName: "15",
+      id: 15,
+      value: 15,
+    },
+  ];
+
   return (
     <div
       className={classNames("postsPage", {
         ["postsPageDark"]: !isLightTheme,
-      })}>
+      })}
+    >
       <div className="postsHeader">
         <div className="postsHeaderTitle">
           <p>{isPersonal ? "My posts" : "All posts"}</p>
@@ -142,28 +164,24 @@ const Posts = ({ isPersonal }: any) => {
               placeholder="Search"
             />
           </div>
-          <div className="pagination">
-            <Input
-              type={"number"}
-              value={limit}
-              onChange={onLimitChange}
-              className="limitInp"
-            />
-            <div className="paginationActions">
-              {page !== 1 && (
-                <button className="prevBtn" onClick={onPrevClick}>
-                  <AiFillCaretLeft />
+          <div className="pagination_limit">
+            <span>Posts per page:</span>
+            {POSTS_LIMIT_TABS.map((tab) => {
+              return (
+                <button
+                  key={tab.id}
+                  className={classNames("limitBtn", {
+                    ["activeLimitBtn"]: tab.id === activeLimitTab,
+                  })}
+                  onClick={() => onLimitChange(tab.value)}
+                >
+                  {tab.tabName}
                 </button>
-              )}
-              <span className="pageNum">{page}</span>
-              {pagesCount !== page && (
-                <button className="nextBtn" onClick={onNextClick}>
-                  <AiFillCaretRight />
-                </button>
-              )}
-            </div>
+              );
+            })}
           </div>
           <div className="selectContainer">
+            <span>Sort by:</span>
             <select className="select" id="selector" onChange={onChangeSelect}>
               <option value={"date"}>Date</option>
               <option value={"title"}>Title</option>
@@ -181,7 +199,8 @@ const Posts = ({ isPersonal }: any) => {
                 className={classNames(`tab ${tab.className}`, {
                   ["activeTab"]: tab.id === activeTab,
                 })}
-                onClick={() => onTabClick(`${tab.id}`)}>
+                onClick={() => onTabClick(`${tab.id}`)}
+              >
                 {tab.tabName}
               </button>
             );
@@ -205,6 +224,12 @@ const Posts = ({ isPersonal }: any) => {
       ) : (
         <EmptyState />
       )}
+      <Pagination
+        pageNum={page}
+        pagesCount={pagesCount}
+        onPrevClick={onPrevClick}
+        onNextClick={onNextClick}
+      />
     </div>
   );
 };

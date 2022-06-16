@@ -1,6 +1,6 @@
 .postsPage {
   box-sizing: border-box;
-  height: 100vh;
+  /* height: 100vh; */
   padding: 30px;
   padding-bottom: 50px;
 
@@ -148,67 +148,55 @@
 .paginationContainer {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   justify-content: space-between;
-  gap: 10px;
+  gap: 20px;
 }
 .searchContainer {
-  width: 25%;
+  width: 30%;
 }
 .searchInp {
   width: 100%;
 }
-.pagination {
+.pagination_limit {
   width: 40%;
   display: flex;
+  gap: 5px;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
-}
-.limitInp {
-  width: 45%;
-}
-.paginationActions {
-  width: 45%;
-  border: 1px solid gray;
-  border-radius: 10px;
-  display: flex;
-  justify-content: space-between;
-}
-.prevBtn,
-.nextBtn {
-  width: 20%;
-  font-size: 20px;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  border: none;
+}
+.limitBtn {
+  width: 80px;
+  height: 30px;
+  border: 2px solid #1f51ff;
+  background-color: white;
   color: #1f51ff;
+  outline: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 15px;
+  text-align: center;
 }
-.prevBtn {
-  border-radius: 10px 0px 0px 10px;
-  border-right: 1px solid gray;
+.activeLimitBtn {
+  background-color: #1f51ff;
+  color: white;
 }
-.nextBtn {
-  border-radius: 0px 10px 10px 0px;
-  border-left: 1px solid gray;
-}
-.pageNum {
-  color: #1f51ff;
-}
-.inactive {
-  color: gray;
+span {
+  font-size: 16px;
+  font-weight: normal;
+  color: lightgray;
 }
 
 .selectContainer {
   width: 15%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
   align-items: center;
+  justify-content: space-between;
 }
 .select {
-  width: 100%;
+  width: 60%;
   height: 30px;
   border: 2px solid #1f51ff;
   border-radius: 20px;
