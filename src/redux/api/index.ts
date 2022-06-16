@@ -54,6 +54,15 @@ const getMyPostsApi = (token: any) => {
   );
 };
 
+const createPostApi = (token: any, postData: any) => {
+  return API.post("/blog/posts/", postData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
 export {
   getPosts,
   getSinglePost,
@@ -64,4 +73,5 @@ export {
   verifyToken,
   getNewAccessToken,
   getMyPostsApi,
+  createPostApi,
 };

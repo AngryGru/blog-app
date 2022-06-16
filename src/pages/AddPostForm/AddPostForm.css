@@ -1,6 +1,6 @@
 .formContainer {
-  height: 100vh;
-  padding: 10px;
+  height: 100%;
+  padding: 20px;
 }
 .addPostForm {
   margin: 0px auto;
@@ -24,6 +24,9 @@
   min-width: 100%;
 }
 .postTitleInput {
+  width: 100%;
+}
+.addPostInp {
   width: 100%;
 }
 .postTextarea {
@@ -77,4 +80,20 @@
   background-color: gold;
   border-color: gold;
   color: black;
+}
+.dragAndDrop {
+  flex: 1;
+  display: flex;
+  padding: 18px 0;
+  justify-content: center;
+  align-items: center;
+
+  background: white;
+  border: 1px dashed gray;
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+.dragAndDrop:hover {
+  cursor: pointer;
+  background: lightcyan;
 }
