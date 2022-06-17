@@ -115,8 +115,8 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
     dispatch(
       registerUser({
         name: username,
-        email: email,
-        password: password,
+        email,
+        password,
         callback,
       })
     );
