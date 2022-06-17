@@ -5,8 +5,11 @@ import Button from "../../../components/Button";
 import { useNavigate } from "react-router-dom";
 import { Theme, useThemeContext } from "../../../context/themeModeContext";
 import classNames from "classnames";
-import { useDispatch } from "react-redux";
-import { registerUser } from "../../../redux/reducers/authReducer";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  registerUser,
+  AuthSelector,
+} from "../../../redux/reducers/authReducer";
 
 type RegistrationFormProps = {
   onLoginLinkClick: (name: string) => void;
@@ -103,16 +106,20 @@ const RegistrationForm: FC<RegistrationFormProps> = (props) => {
   };
   const dispatch = useDispatch();
 
-  const onSubmit = () => {
-    dispatch(
-      registerUser({ name: username, email: email, password: password })
-    );
+  const onSubmit = (e: any) => {
+    e.preventDefault();
+    const callback = () => {
+      navigate("/activate");
+    };
 
-    navigate("/confirm", {
-      state: {
+    dispatch(
+      registerUser({
+        name: username,
         email,
-      },
-    });
+        password,
+        callback,
+      })
+    );
   };
 
   const { theme } = useThemeContext();

@@ -1,20 +1,23 @@
 import { all, takeLatest, put, call } from "redux-saga/effects";
 import { PayloadAction } from "@reduxjs/toolkit";
 import {
-  loadData,
-  setPosts,
-  setPost,
+  loadAllPosts,
+  loadMyPosts,
+  setAllPosts,
+  setMyPosts,
+  setSelectedPost,
   loadPost,
   setAllPostsLoading,
   setSinglePostLoading,
 } from "../reducers/postsReducer";
-import { getPosts, getSinglePost } from "../api/index";
+import { getPosts, getSinglePost, getMyPostsApi } from "../api/index";
+import { callCheckingAuth } from "./callCheckingAuth";
 
 function* getPostsSaga() {
   yield put(setAllPostsLoading(true));
   const { data, status } = yield call(getPosts);
   if (status === 200) {
-    yield put(setPosts(data.results));
+    yield put(setAllPosts(data.results));
   }
   yield put(setAllPostsLoading(false));
 }
@@ -23,14 +26,25 @@ function* getSinglePostSaga(action: PayloadAction<string>) {
   yield put(setSinglePostLoading(true));
   const { data, status } = yield call(getSinglePost, action.payload);
   if (status === 200) {
-    yield put(setPost(data));
+    yield put(setSelectedPost(data));
   }
   yield put(setSinglePostLoading(false));
 }
 
+function* getMyPostsSaga() {
+  yield put(setAllPostsLoading(true));
+  const { data, status } = yield callCheckingAuth(getMyPostsApi);
+  if (status === 200) {
+    console.log(data);
+    yield put(setMyPosts(data.results));
+  }
+  yield put(setAllPostsLoading(false));
+}
+
 export default function* postWatcher() {
   yield all([
-    takeLatest(loadData, getPostsSaga),
+    takeLatest(loadAllPosts, getPostsSaga),
     takeLatest(loadPost, getSinglePostSaga),
+    takeLatest(loadMyPosts, getMyPostsSaga),
   ]);
 }

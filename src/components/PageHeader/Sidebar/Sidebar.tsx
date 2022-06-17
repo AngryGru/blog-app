@@ -8,7 +8,7 @@ import Modal from "../../Modal";
 import { Theme, useThemeContext } from "../../../context/themeModeContext";
 import classNames from "classnames";
 import { useDispatch } from "react-redux";
-import { setLogStatus } from "../../../redux/reducers/authReducer";
+import { setLogOut } from "../../../redux/reducers/authReducer";
 
 export default (props: any) => {
   const { theme } = useThemeContext();
@@ -19,9 +19,7 @@ export default (props: any) => {
   const dispatch = useDispatch();
 
   const onLogOutBtnClick = () => {
-    dispatch(setLogStatus(false));
-    localStorage.setItem("isLoggedIn", "");
-    window.location.replace("/auth");
+    dispatch(setLogOut(""));
     setModalActive(false);
   };
 
@@ -40,13 +38,15 @@ export default (props: any) => {
       })}
       itemClassName={classNames("lightItem", {
         ["darkItem"]: !isLightTheme,
-      })}
-    >
+      })}>
       <NavLink className="menu-item" to="cards-list">
         All posts
       </NavLink>
-      <NavLink className="menu-item" to="info">
+      <NavLink className="menu-item" to="my-posts">
         My posts
+      </NavLink>
+      <NavLink className="menu-item" to="info">
+        Information
       </NavLink>
       <NavLink className="menu-item" to="add-post">
         Add posts
@@ -62,8 +62,7 @@ export default (props: any) => {
           </button>
           <button
             className="logoutCancelBtn"
-            onClick={() => setModalActive(false)}
-          >
+            onClick={() => setModalActive(false)}>
             Cancel
           </button>
         </div>
