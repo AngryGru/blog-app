@@ -41,33 +41,31 @@ const AddPostForm = () => {
     }
   }, [titleError, textError, lessonNumError]);
 
-  const onPostTitleChange = (e: any) => {
-    if (e.target.value.length === 0) {
-      setTitleError("This field is required");
-    } else {
-      setPostTitle(e.target.value);
-      setTitleError("");
-    }
-  };
+  const validation = (target: any, name: any) => {
+    switch (true) {
+      case name === "postTitle" && target.value.length !== 0:
+        setPostTitle(target.value);
+        setTitleError("");
+        break;
+      case name === "postTitle" && target.value.length === 0:
+        setTitleError("This field is required");
+        break;
 
-  const onPostTextChange = (e: any) => {
-    if (e.target.value.length === 0) {
-      setTextError("This field is required");
-    } else {
-      setPostText(e.target.value);
-      setTextError("");
-    }
-  };
+      case name === "postText" && target.value.length !== 0:
+        setPostText(target.value);
+        setTextError("");
+        break;
+      case name === "postText" && target.value.length === 0:
+        setTextError("This field is required");
+        break;
 
-  const onLessonNumChange = (e: any) => {
-    const re = /\-?\d+(\.\d{0,})?/;
-    setLessonNum(e.target.value);
-    if (e.target.value.length === 0) {
-      setLessonNumError("This field is required");
-    } else if (!re.test(e.target.value)) {
-      setLessonNumError("Please enter valid value");
-    } else {
-      setLessonNumError("");
+      case name === "lessonNumber" && target.value.length !== 0:
+        setLessonNum(target.value);
+        setLessonNumError("");
+        break;
+      case name === "lessonNumber" && target.value.length === 0:
+        setLessonNumError("This field is required");
+        break;
     }
   };
 
@@ -146,7 +144,7 @@ const AddPostForm = () => {
             placeholder={"Post title"}
             name={"postTitle"}
             value={postTitle}
-            onChange={(e: any) => onPostTitleChange(e)}
+            onChange={(e: any) => validation(e.target, e.target.name)}
             onBlur={(e: any) => onBlur(e)}
           />
         </label>
@@ -159,13 +157,11 @@ const AddPostForm = () => {
           </div>
           <Input
             className={"addPostInp lessonNumInput"}
-            type={"text"}
+            type={"number"}
             placeholder={"Lesson number"}
             name={"lessonNumber"}
             value={lessonNum}
-            onChange={(e: any) => {
-              onLessonNumChange(e);
-            }}
+            onChange={(e: any) => validation(e.target, e.target.name)}
             onBlur={(e: any) => onBlur(e)}
           />
         </label>
@@ -181,9 +177,7 @@ const AddPostForm = () => {
             placeholder={"Post text"}
             name={"postText"}
             value={postText}
-            onChange={(e: any) => {
-              onPostTextChange(e);
-            }}
+            onChange={(e: any) => validation(e.target, e.target.name)}
             onBlur={(e: any) => onBlur(e)}
           />
         </label>

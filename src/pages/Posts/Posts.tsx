@@ -20,6 +20,7 @@ import {
 import EmptyState from "../../components/EmptyState";
 import Input from "../../components/Input";
 import Pagination from "../../components/Pagination";
+import { useNavigate } from "react-router-dom";
 
 const Posts = ({ isPersonal }: any) => {
   const defaultOptions = {
@@ -86,8 +87,9 @@ const Posts = ({ isPersonal }: any) => {
   const { theme } = useThemeContext();
   const isLightTheme = theme === Theme.Light;
 
+  const navigate = useNavigate();
   const onAddBtnClick = () => {
-    window.location.replace("/add-post");
+    navigate("/add-post");
   };
 
   const selectedImage = useSelector(PostsSelectors.getSelectedImage);
