@@ -1,5 +1,5 @@
 //@ts-nocheck
-import { call } from "redux-saga/effects";
+import { call, put } from "redux-saga/effects";
 import { verifyToken, getNewAccessToken } from "../api/index";
 import { setLogOut } from "../reducers/authReducer";
 

@@ -7,9 +7,11 @@ export type PostState = {
   cardsList: CardType[];
   myCardsList: CardType[];
   postsTab: string;
+  postsLimitTab: number;
 
   isAllPostsLoading: boolean;
   isSinglePostLoading: boolean;
+  totalAllPostsCount: number;
 };
 
 const initialState: PostState = {
@@ -18,8 +20,10 @@ const initialState: PostState = {
   cardsList: [],
   myCardsList: [],
   postsTab: "allPosts",
+  postsLimitTab: 2,
   isAllPostsLoading: false,
   isSinglePostLoading: false,
+  totalAllPostsCount: 0,
 };
 
 const postsSlice = createSlice({
@@ -35,7 +39,7 @@ const postsSlice = createSlice({
         };
       });
     },
-    loadAllPosts: (state, action) => {},
+    loadAllPosts: (state, action: any) => {},
     setSelectedImage: (state, action) => {
       state.selectedImage = action.payload;
     },
@@ -52,7 +56,7 @@ const postsSlice = createSlice({
         };
       });
     },
-    loadMyPosts: (state, action) => {},
+    loadMyPosts: (state, action: any) => {},
     setLikePost: (state: any, action) => {
       const card = state.cardsList.find((c: any) => c.id === action.payload.id);
       if (card) {
@@ -68,12 +72,19 @@ const postsSlice = createSlice({
     setPostsTab: (state, action) => {
       state.postsTab = action.payload;
     },
+    setPostsLimitTab: (state, action) => {
+      state.postsLimitTab = action.payload;
+    },
     setAllPostsLoading: (state, action) => {
       state.isAllPostsLoading = action.payload;
     },
     setSinglePostLoading: (state, action) => {
       state.isSinglePostLoading = action.payload;
     },
+    setTotalAllPostsCount: (state, action) => {
+      state.totalAllPostsCount = action.payload;
+    },
+    createPost: (state: any, action: any) => {},
   },
 });
 
@@ -86,10 +97,13 @@ export const {
   setLikePost,
   setSavedPost,
   setPostsTab,
+  setPostsLimitTab,
   setAllPostsLoading,
   setSinglePostLoading,
   loadMyPosts,
   setMyPosts,
+  setTotalAllPostsCount,
+  createPost,
 } = postsSlice.actions;
 
 export default postsSlice.reducer;
@@ -98,6 +112,7 @@ export const PostsSelectors = {
   getSelectedPost: (state: any) => state.posts.selectedPost,
   getSelectedImage: (state: any) => state.posts.selectedImage,
   getPostsTab: (state: any) => state.posts.postsTab,
+  getPostsLimitTab: (state: any) => state.posts.postsLimitTab,
   getCards: (state: any, filter: any, isPersonal: boolean) => {
     const cards = isPersonal ? state.posts.myCardsList : state.posts.cardsList;
     switch (filter) {
@@ -115,4 +130,5 @@ export const PostsSelectors = {
   },
   getAllPostsLoading: (state: any) => state.posts.isAllPostsLoading,
   getSinglePostLoading: (state: any) => state.posts.isSinglePostLoading,
+  getTotalAllPostsCount: (state: any) => state.posts.totalAllPostsCount,
 };

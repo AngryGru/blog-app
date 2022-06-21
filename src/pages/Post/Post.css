@@ -1,11 +1,14 @@
 .postPage {
-  height: 100vh;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  margin-top: 30px;
+  padding-bottom: 30px;
 }
 .postContainer {
-  max-height: 80%;
+  max-height: fit-content;
   width: 65%;
   margin: 0 auto;
   display: flex;
@@ -39,6 +42,7 @@
   width: 60%;
   text-align: justify;
   padding-left: 30px;
+  padding-right: 20px;
   color: darkgrey;
 }
 .postDate {

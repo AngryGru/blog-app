@@ -10,8 +10,8 @@ const API = create({
   baseURL: "https://studapi.teachmeskills.by/",
 });
 
-const getPosts = () => {
-  return API.get("/blog/posts/");
+const getPosts = ({ search = "", limit = 2, offset = 0, order = "date" }) => {
+  return API.get("/blog/posts/", { search, limit, offset, order });
 };
 
 const getSinglePost = (id: string) => {
@@ -54,6 +54,15 @@ const getMyPostsApi = (token: any) => {
   );
 };
 
+const createPostApi = (token: any, postData: any) => {
+  return API.post("/blog/posts/", postData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
 export {
   getPosts,
   getSinglePost,
@@ -64,4 +73,5 @@ export {
   verifyToken,
   getNewAccessToken,
   getMyPostsApi,
+  createPostApi,
 };

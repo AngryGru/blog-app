@@ -1,6 +1,6 @@
 .postsPage {
   box-sizing: border-box;
-  height: 100vh;
+  /* height: 100vh; */
   padding: 30px;
   padding-bottom: 50px;
 
@@ -142,4 +142,63 @@
 .postsPageDark .activeSave {
   color: darkorange;
   font-size: 30px;
+}
+
+/* PAGINATION STYLES */
+.paginationContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+.searchContainer {
+  width: 30%;
+}
+.searchInp {
+  width: 100%;
+}
+.pagination_limit {
+  width: 40%;
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  align-items: center;
+}
+.limitBtn {
+  width: 80px;
+  height: 30px;
+  border: 2px solid #1f51ff;
+  background-color: white;
+  color: #1f51ff;
+  outline: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 15px;
+  text-align: center;
+}
+.activeLimitBtn {
+  background-color: #1f51ff;
+  color: white;
+}
+span {
+  font-size: 16px;
+  font-weight: normal;
+  color: lightgray;
+}
+
+.selectContainer {
+  width: 15%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.select {
+  width: 60%;
+  height: 30px;
+  border: 2px solid #1f51ff;
+  border-radius: 20px;
+  outline: none;
 }

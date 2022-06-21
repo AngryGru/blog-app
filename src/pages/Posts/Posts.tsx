@@ -13,10 +13,14 @@ import {
   PostsSelectors,
   setSelectedImage,
   setPostsTab,
+  setPostsLimitTab,
   loadAllPosts,
   loadMyPosts,
 } from "../../redux/reducers/postsReducer";
 import EmptyState from "../../components/EmptyState";
+import Input from "../../components/Input";
+import Pagination from "../../components/Pagination";
+import { useNavigate } from "react-router-dom";
 
 const Posts = ({ isPersonal }: any) => {
   const defaultOptions = {
@@ -31,6 +35,7 @@ const Posts = ({ isPersonal }: any) => {
   const dispatch = useDispatch();
 
   const activeTab = useSelector(PostsSelectors.getPostsTab);
+  const activeLimitTab = useSelector(PostsSelectors.getPostsLimitTab);
 
   const cardsList = useSelector((state) =>
     PostsSelectors.getCards(state, activeTab, isPersonal)
@@ -41,15 +46,50 @@ const Posts = ({ isPersonal }: any) => {
     dispatch(setPostsTab(tab));
   };
 
+  const totalCount = useSelector(PostsSelectors.getTotalAllPostsCount);
+  const [search, setSearch] = useState("");
+  const [limit, setLimit] = useState(2);
+  const [page, setPage] = useState(1);
+  const [order, setOrder] = useState("date");
+  const pagesCount = Math.ceil(totalCount / limit);
+
   useEffect(() => {
-    dispatch(isPersonal ? loadMyPosts("") : loadAllPosts(""));
-  }, []);
+    const offset = (page - 1) * limit;
+    dispatch(
+      isPersonal
+        ? loadMyPosts("")
+        : loadAllPosts({ search, limit, offset, order })
+    );
+  }, [search, limit, page, order]);
+
+  const onSearch = (event: any) => {
+    setSearch(event.target.value);
+    setPage(1);
+  };
+
+  const onLimitChange = (value: number) => {
+    dispatch(setPostsLimitTab(value));
+    setLimit(value);
+    setPage(1);
+  };
+
+  const onPrevClick = () => {
+    setPage(page - 1);
+  };
+  const onNextClick = () => {
+    setPage(page + 1);
+  };
+  const onChangeSelect = (event: any) => {
+    setOrder(event.target.value);
+    setPage(1);
+  };
 
   const { theme } = useThemeContext();
   const isLightTheme = theme === Theme.Light;
 
+  const navigate = useNavigate();
   const onAddBtnClick = () => {
-    window.location.replace("/add-post");
+    navigate("/add-post");
   };
 
   const selectedImage = useSelector(PostsSelectors.getSelectedImage);
@@ -80,11 +120,35 @@ const Posts = ({ isPersonal }: any) => {
     { tabName: <IoBookmarkOutline />, id: "savedPosts", className: "saveTab" },
   ];
 
+  const POSTS_LIMIT_TABS = [
+    {
+      tabName: "2",
+      id: 2,
+      value: 2,
+    },
+    {
+      tabName: "5",
+      id: 5,
+      value: 5,
+    },
+    {
+      tabName: "10",
+      id: 10,
+      value: 10,
+    },
+    {
+      tabName: "15",
+      id: 15,
+      value: 15,
+    },
+  ];
+
   return (
     <div
       className={classNames("postsPage", {
         ["postsPageDark"]: !isLightTheme,
-      })}>
+      })}
+    >
       <div className="postsHeader">
         <div className="postsHeaderTitle">
           <p>{isPersonal ? "My posts" : "All posts"}</p>
@@ -92,6 +156,43 @@ const Posts = ({ isPersonal }: any) => {
             Add
           </button>
         </div>
+
+        <div className="paginationContainer">
+          <div className="searchContainer">
+            <Input
+              value={search}
+              onChange={onSearch}
+              className="searchInp"
+              placeholder="Search"
+            />
+          </div>
+          <div className="pagination_limit">
+            <span>Posts per page:</span>
+            {POSTS_LIMIT_TABS.map((tab) => {
+              return (
+                <button
+                  key={tab.id}
+                  className={classNames("limitBtn", {
+                    ["activeLimitBtn"]: tab.id === activeLimitTab,
+                  })}
+                  onClick={() => onLimitChange(tab.value)}
+                >
+                  {tab.tabName}
+                </button>
+              );
+            })}
+          </div>
+          <div className="selectContainer">
+            <span>Sort by:</span>
+            <select className="select" id="selector" onChange={onChangeSelect}>
+              <option value={"date"}>Date</option>
+              <option value={"title"}>Title</option>
+              <option value={"text"}>Text</option>
+              <option value={"lesson_num"}>Lesson</option>
+            </select>
+          </div>
+        </div>
+
         <div className="postsHeaderTabs">
           {POSTS_TABS.map((tab) => {
             return (
@@ -100,7 +201,8 @@ const Posts = ({ isPersonal }: any) => {
                 className={classNames(`tab ${tab.className}`, {
                   ["activeTab"]: tab.id === activeTab,
                 })}
-                onClick={() => onTabClick(`${tab.id}`)}>
+                onClick={() => onTabClick(`${tab.id}`)}
+              >
                 {tab.tabName}
               </button>
             );
@@ -117,7 +219,6 @@ const Posts = ({ isPersonal }: any) => {
           {selectedImage && <img src={selectedImage} alt="Selected image" />}
         </div>
       </Modal>
-
       {allPostsLoading ? (
         <Lottie options={defaultOptions} height={400} width={400} />
       ) : cardsList.length > 0 ? (
@@ -125,6 +226,12 @@ const Posts = ({ isPersonal }: any) => {
       ) : (
         <EmptyState />
       )}
+      <Pagination
+        pageNum={page}
+        pagesCount={pagesCount}
+        onPrevClick={onPrevClick}
+        onNextClick={onNextClick}
+      />
     </div>
   );
 };

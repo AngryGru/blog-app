@@ -9,15 +9,23 @@ import {
   loadPost,
   setAllPostsLoading,
   setSinglePostLoading,
+  setTotalAllPostsCount,
+  createPost,
 } from "../reducers/postsReducer";
-import { getPosts, getSinglePost, getMyPostsApi } from "../api/index";
+import {
+  getPosts,
+  getSinglePost,
+  getMyPostsApi,
+  createPostApi,
+} from "../api/index";
 import { callCheckingAuth } from "./callCheckingAuth";
 
-function* getPostsSaga() {
+function* getPostsSaga(action: any) {
   yield put(setAllPostsLoading(true));
-  const { data, status } = yield call(getPosts);
+  const { data, status } = yield call(getPosts, action.payload);
   if (status === 200) {
     yield put(setAllPosts(data.results));
+    yield put(setTotalAllPostsCount(data.count));
   }
   yield put(setAllPostsLoading(false));
 }
@@ -41,10 +49,20 @@ function* getMyPostsSaga() {
   yield put(setAllPostsLoading(false));
 }
 
-export default function* postWatcher() {
+function* createPostSaga(action: any) {
+  const { data, status } = yield callCheckingAuth(
+    createPostApi,
+    action.payload
+  );
+  console.log(status);
+  console.log(data);
+}
+
+export default function* postsWatcher() {
   yield all([
     takeLatest(loadAllPosts, getPostsSaga),
     takeLatest(loadPost, getSinglePostSaga),
     takeLatest(loadMyPosts, getMyPostsSaga),
+    takeLatest(createPost, createPostSaga),
   ]);
 }
